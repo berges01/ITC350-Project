@@ -1,43 +1,42 @@
 CREATE TABLE Users
 (
-  FirstName INT NOT NULL,
-  UserName INT NOT NULL,
-  LastName INT NOT NULL,
+  FirstName CHAR(20) NOT NULL,
+  UserName CHAR(20) NOT NULL,
+  LastName CHAR(20) NOT NULL,
   PRIMARY KEY (UserName)
 );
 
 CREATE TABLE Director
 (
-  Director_Name INT NOT NULL,
+  Director_Name CHAR(40) NOT NULL,
   Director_ID INT NOT NULL,
   PRIMARY KEY (Director_ID)
 );
 
 CREATE TABLE Actors
 (
-  Actor_Name INT NOT NULL,
-  Actor_ID INT NOT NULL,
+  Actor_Name CHAR(40) NOT NULL,
+  Actor_ID INT NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (Actor_ID)
 );
 
 CREATE TABLE Award
 (
-  Award_Name INT NOT NULL,
-  Award_ID INT NOT NULL,
-  Year_Awarded INT NOT NULL,
+  Award_Name CHAR(50) NOT NULL,
+  Award_ID INT NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (Award_ID)
 );
 
 CREATE TABLE Movie
 (
-  Title INT NOT NULL,
-  Release_Date INT NOT NULL,
+  Title TEXT(50) NOT NULL,
+  Release_Date DATE NOT NULL,
   IMDB_Rating INT NOT NULL,
-  Genre INT NOT NULL,
-  Content_Rating INT NOT NULL,
+  Genre CHAR(20) NOT NULL,
+  Content_Rating CHAR(8) NOT NULL,
   Running_Time INT NOT NULL,
-  Movie_ID INT NOT NULL,
-  IMDB_Link INT NOT NULL,
+  Movie_ID INT NOT NULL AUTO_INCREMENT,
+  IMDB_Link TEXT NOT NULL,
   Director_ID INT NOT NULL,
   PRIMARY KEY (Movie_ID),
   FOREIGN KEY (Director_ID) REFERENCES Director(Director_ID)
