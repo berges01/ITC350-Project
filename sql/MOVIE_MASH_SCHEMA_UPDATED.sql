@@ -1,21 +1,21 @@
 CREATE TABLE Users
 (
-  FirstName CHAR(20) NOT NULL,
-  UserName CHAR(20) NOT NULL,
-  LastName CHAR(20) NOT NULL,
-  PRIMARY KEY (UserName)
+  FirstName CHAR(30) NOT NULL,
+  LastName CHAR(30) NOT NULL,
+  UserID INT NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (UserID)
 );
 
 CREATE TABLE Director
 (
-  Director_Name CHAR(40) NOT NULL,
-  Director_ID INT NOT NULL,
+  Director_Name CHAR(50) NOT NULL,
+  Director_ID INT NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (Director_ID)
 );
 
 CREATE TABLE Actors
 (
-  Actor_Name CHAR(40) NOT NULL,
+  Actor_Name CHAR(50) NOT NULL,
   Actor_ID INT NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (Actor_ID)
 );
@@ -24,19 +24,20 @@ CREATE TABLE Award
 (
   Award_Name CHAR(50) NOT NULL,
   Award_ID INT NOT NULL AUTO_INCREMENT,
+  Year_Awarded INT(4) NOT NULL,
   PRIMARY KEY (Award_ID)
 );
 
 CREATE TABLE Movie
 (
-  Title TEXT(50) NOT NULL,
-  Release_Date DATE NOT NULL,
-  IMDB_Rating INT NOT NULL,
-  Genre CHAR(20) NOT NULL,
+  Title CHAR(50) NOT NULL,
+  Release_Year INT(4) NOT NULL,
+  IMDB_Rating_Percentage INT(3) NOT NULL,
+  Genre CHAR(30) NOT NULL,
   Content_Rating CHAR(8) NOT NULL,
-  Running_Time INT NOT NULL,
+  Running_Time_Minutes INT(3) NOT NULL,
   Movie_ID INT NOT NULL AUTO_INCREMENT,
-  IMDB_Link TEXT NOT NULL,
+  IMDB_Link CHAR(500) NOT NULL,
   Director_ID INT NOT NULL,
   PRIMARY KEY (Movie_ID),
   FOREIGN KEY (Director_ID) REFERENCES Director(Director_ID)
@@ -48,10 +49,10 @@ CREATE TABLE FavoritedByFavorite
   UserName INT NOT NULL,
   PRIMARY KEY (Movie_ID, UserName),
   FOREIGN KEY (Movie_ID) REFERENCES Movie(Movie_ID),
-  FOREIGN KEY (UserName) REFERENCES Users(UserName)
+  FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
 
-CREATE TABLE HasActors
+CREATE TABLE Has
 (
   Movie_ID INT NOT NULL,
   Actor_ID INT NOT NULL,
@@ -60,19 +61,11 @@ CREATE TABLE HasActors
   FOREIGN KEY (Actor_ID) REFERENCES Actors(Actor_ID)
 );
 
-CREATE TABLE hasAwards
+CREATE TABLE Has
 (
   Award_ID INT NOT NULL,
   Movie_ID INT NOT NULL,
   PRIMARY KEY (Award_ID, Movie_ID),
   FOREIGN KEY (Award_ID) REFERENCES Award(Award_ID),
-  FOREIGN KEY (Movie_ID) REFERENCES Movie(Movie_ID)
-);
-
-CREATE TABLE MovieFavoritedByUser
-(
-  Favorited_By_Username INT NOT NULL,
-  Movie_ID INT NOT NULL,
-  PRIMARY KEY (Favorited_By_Username, Movie_ID),
   FOREIGN KEY (Movie_ID) REFERENCES Movie(Movie_ID)
 );
