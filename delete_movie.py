@@ -28,7 +28,7 @@ def CreateCursor(DataBase):
                 print(movie_id)
                 try:
                     values = (Director_Name, Director_ID)
-                    query = 'INSERT INTO director (Director_Name, Director_ID) VALUES (%s, %s)'
+                    query = 'DELETE FROM movie_mash_schema (Movie_ID) VALUES (%s)'
                     cursor = DataBase.cursor()
                     cursor.execute(query, values)
                     DataBase.commit()
