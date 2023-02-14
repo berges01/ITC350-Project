@@ -1,42 +1,43 @@
 import mysql.connector
 import csv
 
-
 def main():
     DataBase = CreateConnection()
     CreateCursor(DataBase)
 
-
 def CreateConnection():
     DataBase = mysql.connector.connect(
-        host="localhost",
+        host = "localhost",
         user="root",
-        passwd="erik1999",
-        database="movie_mash",
+        passwd="Viva La Vida2009!",
+        database="movie_mash"
         port=3306
     )
     return DataBase
 
 
 def CreateCursor(DataBase):
-    with open('data/movie_data.csv', mode='r') as csv_file:
+    with open('data/user_data.csv', mode='r') as csv_file:
         reader = csv.DictReader(csv_file, delimiter=',')
         try:
             for row in reader:
-                print(" -------------- Movie -----------------")
-                movie_id = int(row['Movie_ID'])
-                print(movie_id)
+                UserName = row['UserName']
+                print(UserName)
+                FirstName = row['FirstName']
+                print(FirstName)
+                LastName = row['LastName']
+                print(LastName)
                 try:
-                    values = (Director_Name, Director_ID)
-                    query = 'DELETE FROM movie_mash (Movie_ID) VALUES (%s)'
+                    values = (UserName, FirstName, LastName)
+                    query = 'INSERT INTO user (UserName, FirstName, LastName) VALUES (%s, %s)'
                     cursor = DataBase.cursor()
                     cursor.execute(query, values)
                     DataBase.commit()
                     print(cursor.rowcount, "record inserted.")
                 except Exception as insert_error:
-                    print("DB Deletion Error: %s" % insert_error)
+                    print("DB Insertion Error: %s" % insert_error)
         except KeyError as e:
-            print("Key Error (Key or Data Type Incorrect): %s" % e)
+                print("Key Error (Key or Data Type Incorrect): %s" % e)
     DataBase.close()
 
 if __name__ == "__main__":
