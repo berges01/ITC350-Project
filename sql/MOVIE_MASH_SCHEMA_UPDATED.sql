@@ -37,7 +37,7 @@ CREATE TABLE Movie
   Content_Rating CHAR(8) NOT NULL,
   Running_Time_Minutes INT(3) NOT NULL,
   Movie_ID INT NOT NULL AUTO_INCREMENT,
-  IMDB_Link CHAR(500) NOT NULL,
+  IMDB_Link TEXT(500) NOT NULL,
   Director_ID INT NOT NULL,
   PRIMARY KEY (Movie_ID),
   FOREIGN KEY (Director_ID) REFERENCES Director(Director_ID)

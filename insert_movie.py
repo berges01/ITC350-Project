@@ -12,7 +12,7 @@ def CreateConnection():
         host="localhost",
         user="root",
         passwd="Viva La Vida2009!",
-        database="movie_mash_schema",
+        database="movie_mash",
         port=3306
     )
     return DataBase
@@ -39,12 +39,14 @@ def CreateCursor(DataBase):
             print(movie_id)
             imdb_link = row['IMDB_Link']
             print(imdb_link)
-    values = (title, release_date, imdb_rating, movie_genre, content_rating, running_time, movie_id, imdb_link)
-    # values = ('test movie','11-11-2002',1,'test','PG',123,240,'test.com')
-    query = '''INSERT INTO movie_mash_schema.movie (Title, Release_Date, IMDB_Rating, Genre, Content_Rating, Running_Time, Movie_ID, IMDB_Link) VALUES (%s, %s, %d, %s, %s, %d, %d, %s )''' % values
-    cursor = DataBase.cursor()
-    cursor.execute(query)
-    DataBase.commit()
+            values = (title, release_date, imdb_rating, movie_genre, content_rating, running_time, movie_id, imdb_link)
+            # values = ('test movie','11-11-2002',1,'test','PG',123,240,'test.com')
+            query = 'INSERT INTO movie_mash_schema.movie (Title, Release_Date, IMDB_Rating, Genre, Content_Rating, ' \
+                    'Running_Time, Movie_ID, IMDB_Link) VALUES (%s, %s, %s, %s, %s, %s, %s, %s )'
+            cursor = DataBase.cursor()
+            cursor.execute(query, values)
+            DataBase.commit()
+        DataBase.close()
 
 
 if __name__ == "__main__":
