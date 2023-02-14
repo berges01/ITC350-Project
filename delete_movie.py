@@ -24,10 +24,8 @@ def CreateCursor(DataBase):
         try:
             for row in reader:
                 print(" -------------- Movie -----------------")
-                Director_Name = row['Director_Name']
-                print(Director_Name)
-                Director_ID = row['Director_ID']
-                print(Director_ID)
+                movie_id = int(row['Movie_ID'])
+                print(movie_id)
                 try:
                     values = (Director_Name, Director_ID)
                     query = 'INSERT INTO director (Director_Name, Director_ID) VALUES (%s, %s)'
@@ -36,7 +34,7 @@ def CreateCursor(DataBase):
                     DataBase.commit()
                     print(cursor.rowcount, "record inserted.")
                 except Exception as insert_error:
-                    print("DB Insertion Error: %s" % insert_error)
+                    print("DB Deletion Error: %s" % insert_error)
         except KeyError as e:
             print("Key Error (Key or Data Type Incorrect): %s" % e)
     DataBase.close()
