@@ -19,7 +19,7 @@ def CreateConnection():
 
 
 def CreateCursor(DataBase):
-    with open('data/director_data.csv', mode='r') as csv_file:
+    with open('data/movie_data.csv', mode='r') as csv_file:
         reader = csv.DictReader(csv_file, delimiter=',')
         try:
             for row in reader:
@@ -28,7 +28,7 @@ def CreateCursor(DataBase):
                 print(movie_id)
                 try:
                     values = (Director_Name, Director_ID)
-                    query = 'DELETE FROM movie_mash_schema (Movie_ID) VALUES (%s)'
+                    query = 'DELETE FROM movie_mash (Movie_ID) VALUES (%s)'
                     cursor = DataBase.cursor()
                     cursor.execute(query, values)
                     DataBase.commit()
