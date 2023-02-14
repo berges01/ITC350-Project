@@ -24,8 +24,7 @@ def CreateCursor(DataBase):
             print(Director_Name)
             Director_ID = row['Director_ID']
             print(Director_ID)
-    values = () 
-    #values = ('test movie','11-11-2002',1,'test','PG',123,240,'test.com')      
+    values = (Director_Name, Director_ID)      
     query = 'INSERT INTO director (Director_Name, Director_ID)'
     cursor = DataBase.cursor()
     cursor.execute(query,values)
