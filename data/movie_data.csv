@@ -2,15 +2,15 @@ Title,Release_Year,IMDB_Rating,Genre,Content_Rating,Running_Time,Movie_ID,IMDB_L
 Tenet,2020,7,Action,PG-13,150,0,https://www.imdb.com/title/tt6723592/
 Inception,2010,8,Action,PG-13,148,1,https://www.imdb.com/title/tt1375666/?ref_=nm_knf_c_2
 Arrival,2016,8,Drama,PG-13,116,2,https://www.imdb.com/title/tt2543164/?ref_=nv_sr_srsg_0
-Lilo and Stitch,2002,7.3,Adventure,PG,85,3,https://www.imdb.com/title/tt0275847/?ref_=nv_sr_srsg_0
+Lilo and Stitch,2002,7,Adventure,PG,85,3,https://www.imdb.com/title/tt0275847/?ref_=nv_sr_srsg_0
 The Incredibles,2004,8,Action,PG,115,4,https://www.imdb.com/title/tt0317705/?ref_=nv_sr_srsg_0
-Avengers: Endgame,2019,8.4,Action,PG-13,181,5,https://www.imdb.com/title/tt4154796/?ref_=fn_al_tt_1
-Avengers: Infinity War,2018,8.4,Action,PG-13,149,6,https://www.imdb.com/title/tt4154756/?ref_=fn_al_tt_1
-Captain America: Civil War,2016,7.8,Action,PG-13,147,7,https://www.imdb.com/title/tt3498820/?ref_=fn_al_tt_1
-Captain America: Winter Soldier,2015,7.8,Action,PG-13,136,8,https://www.imdb.com/title/tt1843866/?ref_=nv_sr_srsg_1
-Captain America: The First Avenger,2011,6.9,Action,PG-13,124,9,https://www.imdb.com/title/tt0458339/?ref_=fn_al_tt_1
-Ant Man,2015,7.3,Action,PG-13,117,10,https://www.imdb.com/title/tt0478970/?ref_=fn_al_tt_2
+Avengers: Endgame,2019,8,Action,PG-13,181,5,https://www.imdb.com/title/tt4154796/?ref_=fn_al_tt_1
+Avengers: Infinity War,2018,8,Action,PG-13,149,6,https://www.imdb.com/title/tt4154756/?ref_=fn_al_tt_1
+Captain America: Civil War,2016,8,Action,PG-13,147,7,https://www.imdb.com/title/tt3498820/?ref_=fn_al_tt_1
+Captain America: Winter Soldier,2015,8,Action,PG-13,136,8,https://www.imdb.com/title/tt1843866/?ref_=nv_sr_srsg_1
+Captain America: The First Avenger,2011,7,Action,PG-13,124,9,https://www.imdb.com/title/tt0458339/?ref_=fn_al_tt_1
+Ant Man,2015,7,Action,PG-13,117,10,https://www.imdb.com/title/tt0478970/?ref_=fn_al_tt_2
 Ant Man and the Wasp,2018,7,Action,PG-13,118,11,https://www.imdb.com/title/tt5095030/?ref_=fn_al_tt_3
-Iron Man,2008,7.9,Action,PG-13,126,12,https://www.imdb.com/title/tt0371746/?ref_=fn_al_tt_1
-Iron Man 2,2010,6.9,Action,PG-13,124,13,https://www.imdb.com/title/tt1228705/?ref_=fn_al_tt_3
-Iron Man 3,2013,7.1,Action,PG-13,130,14,https://www.imdb.com/title/tt1300854/?ref_=fn_al_tt_2
+Iron Man,2008,8,Action,PG-13,126,12,https://www.imdb.com/title/tt0371746/?ref_=fn_al_tt_1
+Iron Man 2,2010,7,Action,PG-13,124,13,https://www.imdb.com/title/tt1228705/?ref_=fn_al_tt_3
+Iron Man 3,2013,7,Action,PG-13,130,14,https://www.imdb.com/title/tt1300854/?ref_=fn_al_tt_2
