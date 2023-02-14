@@ -41,5 +41,6 @@ def CreateCursor(DataBase):
             print("Key Error (Key or Data Type Incorrect): %s" % e)
     DataBase.close()
 
+
 if __name__ == "__main__":
     main()
