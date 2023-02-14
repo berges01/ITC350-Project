@@ -1,18 +1,21 @@
 import mysql.connector
 
+
 def main():
     DataBase = CreateConnection()
     CreateCursor(DataBase)
 
-def CreateConnection():     
+
+def CreateConnection():
     DataBase = mysql.connector.connect(
-        host = "localhost",
-        user = "root",
-        passwd = "Viva La Vida2009!",
-        database = "movie_mash_schema",
-        port = 3306
+        host="localhost",
+        user="root",
+        passwd="Viva La Vida2009!",
+        database="movie_mash_schema",
+        port=3306
     )
     return DataBase
+
 
 def CreateCursor(DataBase):
     query = "SELECT * FROM movie"
