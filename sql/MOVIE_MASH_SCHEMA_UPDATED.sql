@@ -46,13 +46,13 @@ CREATE TABLE Movie
 CREATE TABLE FavoritedByFavorite
 (
   Movie_ID INT NOT NULL,
-  UserName INT NOT NULL,
-  PRIMARY KEY (Movie_ID, UserName),
+  UserID INT NOT NULL,
+  PRIMARY KEY (Movie_ID, UserID),
   FOREIGN KEY (Movie_ID) REFERENCES Movie(Movie_ID),
   FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
 
-CREATE TABLE Has
+CREATE TABLE HasActor
 (
   Movie_ID INT NOT NULL,
   Actor_ID INT NOT NULL,
@@ -61,7 +61,7 @@ CREATE TABLE Has
   FOREIGN KEY (Actor_ID) REFERENCES Actors(Actor_ID)
 );
 
-CREATE TABLE Has
+CREATE TABLE HasAward
 (
   Award_ID INT NOT NULL,
   Movie_ID INT NOT NULL,
