@@ -1,6 +1,4 @@
 import mysql.connector
-import csv
-
 
 def main():
     DataBase = CreateConnection()
@@ -19,25 +17,27 @@ def CreateConnection():
 
 
 def CreateCursor(DataBase):
-    with open('data/movie_data.csv', mode='r') as csv_file:
-        reader = csv.DictReader(csv_file, delimiter=',')
-        try:
-            for row in reader:
-                print(" -------------- Movie -----------------")
-                movie_id = int(row['Movie_ID'])
-                print(movie_id)
-                try:
-                    values = (Director_Name, Director_ID)
-                    query = 'DELETE FROM movie_mash (Movie_ID) VALUES (%s)'
-                    cursor = DataBase.cursor()
-                    cursor.execute(query, values)
-                    DataBase.commit()
-                    print(cursor.rowcount, "record inserted.")
-                except Exception as insert_error:
-                    print("DB Deletion Error: %s" % insert_error)
-        except KeyError as e:
-            print("Key Error (Key or Data Type Incorrect): %s" % e)
+    #grab input
+    movie_id_response = input("Movie_ID to delete:  ")
+    movie_id = int(movie_id_response)
+    
+    #validate input
+    invalid_response = True
+    while invalid_response:
+        if movie_id > 9999 or movie_id < 0:
+            print('invalid input, try again')
+            movie_id_response = input("Movie_ID to delete:  ")
+            movie_id = int(movie_id_response)
+        else: invalid_response = False
+    
+    #execute query
+    query = "DELETE FROM movie_mash.movies WHERE movie_id= '" + movie_id_response + "';"
+    cursor = DataBase.cursor()
+    cursor.execute(query)
+    DataBase.commit()
+    print(cursor.rowcount, "record deleted.")
     DataBase.close()
+
 
 if __name__ == "__main__":
     main()
