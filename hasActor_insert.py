@@ -19,18 +19,18 @@ def CreateConnection():
 
 
 def CreateCursor(DataBase):
-    with open('data/actor_data.csv', mode='r') as csv_file:
+    with open('data/hasActor_data.csv', mode='r') as csv_file:
         reader = csv.DictReader(csv_file, delimiter=',')
         try:
             for row in reader:
-                print(" -------------- Actor -----------------")
-                Actor_Name = row['Actor_Name']
-                print(Actor_Name)
+                print(" -------------- Actor/Movie Relationship -----------------")
+                Movie_ID = row['Movie_ID']
+                print(Movie_ID)
                 Actor_ID = row['Actor_ID']
                 print(Actor_ID)
                 try:
-                    values = (Actor_Name, Actor_ID)
-                    query = 'INSERT INTO actors (Actor_Name, Actor_ID) VALUES (%s, %s)'
+                    values = (Movie_ID, Actor_ID)
+                    query = 'INSERT INTO hasactor (Movie_ID, Actor_ID) VALUES (%s, %s)'
                     cursor = DataBase.cursor()
                     cursor.execute(query, values)
                     DataBase.commit()
