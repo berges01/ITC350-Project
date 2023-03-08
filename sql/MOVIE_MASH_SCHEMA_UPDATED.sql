@@ -24,7 +24,6 @@ CREATE TABLE Award
 (
   Award_Name CHAR(50) NOT NULL,
   Award_ID INT NOT NULL AUTO_INCREMENT,
-  Year_Awarded INT(4) NOT NULL,
   PRIMARY KEY (Award_ID)
 );
 
