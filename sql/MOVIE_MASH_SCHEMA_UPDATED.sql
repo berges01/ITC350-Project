@@ -2,6 +2,7 @@ CREATE TABLE Users
 (
   FirstName CHAR(30) NOT NULL,
   LastName CHAR(30) NOT NULL,
+  Email CHAR(40),
   UserID INT NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (UserID)
 );
