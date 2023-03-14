@@ -31,7 +31,7 @@ CREATE TABLE Movie
 (
   Title CHAR(50) NOT NULL,
   Release_Year INT(4) NOT NULL,
-  IMDB_Rating_Percentage INT(3) NOT NULL,
+  IMDB_Rating INT(3) NOT NULL,
   Genre CHAR(30) NOT NULL,
   Content_Rating CHAR(8) NOT NULL,
   Running_Time_Minutes INT(3) NOT NULL,
