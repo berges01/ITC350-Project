@@ -45,7 +45,7 @@ def CreateCursor(DataBase):
                 values = (
                     title, release_year, imdb_rating, movie_genre, content_rating, running_time, movie_id, imdb_link,
                     director_id)
-                query = 'INSERT INTO movie (Title, Release_Year, IMDB_Rating_Percentage, Genre, Content_Rating, ' \
+                query = 'INSERT INTO movie (Title, Release_Year, IMDB_Rating, Genre, Content_Rating, ' \
                         'Running_Time_Minutes, Movie_ID, IMDB_Link, Director_ID) VALUES (%s, %s, %s, %s, %s, %s, %s, ' \
                         '%s, ' \
                         '%s)'
