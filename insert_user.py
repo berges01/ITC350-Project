@@ -10,7 +10,7 @@ def CreateConnection():
         host = "localhost",
         user="root",
         passwd="Viva La Vida2009!",
-        database="movie_mash"
+        database="movie_mash",
         port=3306
     )
     return DataBase
@@ -21,15 +21,17 @@ def CreateCursor(DataBase):
         reader = csv.DictReader(csv_file, delimiter=',')
         try:
             for row in reader:
-                UserName = row['UserName']
-                print(UserName)
                 FirstName = row['FirstName']
                 print(FirstName)
                 LastName = row['LastName']
                 print(LastName)
+                UserID = row['UserID']
+                print(UserID)
+                Email = row['Email']
+                print(Email)
                 try:
-                    values = (UserName, FirstName, LastName)
-                    query = 'INSERT INTO user (UserName, FirstName, LastName) VALUES (%s, %s)'
+                    values = (FirstName, LastName, UserID, Email)
+                    query = 'INSERT INTO user (FirstName, LastName, UserID, Email) VALUES (%s, %s, %s)'
                     cursor = DataBase.cursor()
                     cursor.execute(query, values)
                     DataBase.commit()
