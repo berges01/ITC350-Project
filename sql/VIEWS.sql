@@ -41,3 +41,8 @@ CREATE VIEW `sortbygenre` AS
 SELECT Title,Genre
 FROM Movie
 ORDER BY Genre ASC;
+
+CREATE VIEW `selectmovies` AS
+SELECT *
+FROM movie
+ORDER BY Title ASC;
