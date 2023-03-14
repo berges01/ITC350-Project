@@ -11,14 +11,14 @@ try:
 
     cursor = DataBase.cursor(prepared=True)
     # Parameterized query
-    sql_insert_query = """ INSERT INTO Employee
-                       (id, Name, Joining_date, salary) VALUES (%s,%s,%s,%s)"""
+    sql_create_view_query = """ CREATE VIEW `moviesWithActor` AS 
+                       SELECT Title
+                       FROM movie
+                       WHERE VALUES (%s)"""
     # tuple to insert at placeholder
-    tuple1 = (1, "Json", "2019-03-23", 9000)
-    tuple2 = (2, "Emma", "2019-05-19", 9500)
+    tuple1 = (actorName)
 
-    cursor.execute(sql_insert_query, tuple1)
-    cursor.execute(sql_insert_query, tuple2)
+    cursor.execute(sql_create_view_query, tuple1)
     connection.commit()
     print("Data inserted successfully into employee table using the prepared statement")
 
