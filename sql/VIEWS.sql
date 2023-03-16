@@ -47,6 +47,18 @@ SELECT *
 FROM movie
 ORDER BY Title ASC;
 
+CREATE VIEW `uniquegenre` AS
+SELECT distinct Genre
+FROM movie
+ORDER BY Genre ASC;
+
+CREATE VIEW `averageratingofmoviewithactor` AS
+SELECT actors.Actor_Name, actors.Actor_ID, hasactor.Movie_ID, movie.IMDB_Rating
+FROM actors
+INNER JOIN hasactor ON actors.Actor_ID = hasactor.Actor_ID
+INNER JOIN movie ON hasactor.Movie_ID = movie.Movie_ID;
+
+
 
 
 

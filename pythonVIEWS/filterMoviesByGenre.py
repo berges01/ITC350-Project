@@ -33,7 +33,7 @@ def CreateCursor(DataBase):
     #execute query to check if genre exists.
     data = (genre,)
     query = "SELECT Title, Genre, Movie_ID FROM movie_mash.selectmovies WHERE Genre = %s ORDER BY Title ASC;"
-    cursor = DataBase.cursor()
+    cursor = DataBase.cursor(prepared = True)
     cursor.execute(query,data)
     result = cursor.fetchall()
     count = 0
