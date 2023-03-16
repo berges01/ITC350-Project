@@ -18,21 +18,21 @@ def CreateConnection():
 
 def CreateCursor(DataBase):
     #grab input
-    genre_response = input("Movie Genre (Exact Match):  ")
-    genre = str(genre_response)
+    rating_response = input("Enter Rating (G,PG,PG-13,R) (Exact Match):  ")
+    rating = str(rating_response)
     
     #validate input
     invalid_response = True
     while invalid_response:
-        if len(genre) > 50:
-            print('invalid input, response too long.')
-            genre_response = input("Movie Genre (Exact Match):  ")
-            genre = str(genre_response)
+        if len(rating) > 50 or rating not in ["G","PG","PG-13","R"]:
+            print('invalid input, response too long or invalid. Try again.')
+            rating_response = input("Enter Rating (G,PG,PG-13,R) (Exact Match):  ")
+            rating = str(rating_response)
         else: invalid_response = False
     
     #execute query to check if genre exists.
-    data = (genre,)
-    query = "SELECT Title, Genre, Movie_ID FROM movie_mash.selectmovies WHERE Genre = %s ORDER BY Title ASC;"
+    data = (rating,)
+    query = "SELECT Title, Content_Rating FROM movie_mash.selectmovies WHERE Content_Rating = %s ORDER BY Title ASC;"
     cursor = DataBase.cursor()
     cursor.execute(query,data)
     result = cursor.fetchall()
@@ -41,7 +41,7 @@ def CreateCursor(DataBase):
         count = count + 1
         print(x)
     if count == 0:
-        print('No genre of this type was found.')
+        print('No movies with a content rating of this type were found.')
     DataBase.commit()
     DataBase.close()
 
