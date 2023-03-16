@@ -31,7 +31,7 @@ def CreateCursor(DataBase):
                 print(Email)
                 try:
                     values = (FirstName, LastName, UserID, Email)
-                    query = 'INSERT INTO user (FirstName, LastName, UserID, Email) VALUES (%s, %s, %s)'
+                    query = 'INSERT INTO users (FirstName, LastName, UserID, Email) VALUES (%s, %s, %s, %s)'
                     cursor = DataBase.cursor()
                     cursor.execute(query, values)
                     DataBase.commit()
