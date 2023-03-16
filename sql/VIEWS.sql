@@ -42,7 +42,39 @@ SELECT Title,Genre
 FROM Movie
 ORDER BY Genre ASC;
 
-CREATE VIEW `selectmovies` AS
+CREATE VIEW 'selectmovies' AS
 SELECT *
 FROM movie
 ORDER BY Title ASC;
+
+
+
+
+
+
+
+
+
+
+/*for Actor-Award python view - need to get movie IDS with actor names*/
+CREATE VIEW `movieidswithactornames` AS
+SELECT hasActor.movie_id, hasActor.actor_id, actors.actor_name 
+FROM hasActor 
+INNER JOIN actor ON
+actor.id=hasActor.actor_id;
+
+/*getting movieIDs with award names*/
+CREATE VIEW `movieidswithawardnames` AS SELECT hasAward.movie_id, hasAward.award_id, award.award_name
+FROM hasAward
+INNER JOIN award ON
+award.award_id=hasAward.award_id
+ORDER BY movie_id ASC;
+
+/*actor names with award names!!*/
+CREATE VIEW `actornameswithawardnames` AS
+SELECT movieidswithactornames.actor_id, movieidswithactornames.actor_name, movieidswithawardnames.award_name, movieidswithawardnames.award_id
+FROM movieidswithactornames 
+INNER JOIN movieidswithawardnames ON 
+movieidswithawardnames.movie_id=movieidswithactornames.movie_id
+ORDER BY actor_id ASC;
+
