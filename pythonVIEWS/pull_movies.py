@@ -11,14 +11,14 @@ def CreateConnection():
         host="localhost",
         user="root",
         passwd="Viva La Vida2009!",
-        database="movie_mash_schema",
+        database="movie_mash",
         port=3306
     )
     return DataBase
 
 
 def CreateCursor(DataBase):
-    query = "SELECT * FROM movie"
+    query = "SELECT * FROM movie ORDER BY Title ASC"
     cursor = DataBase.cursor()
     cursor.execute(query)
     rows = cursor.fetchall()
