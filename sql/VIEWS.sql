@@ -72,7 +72,7 @@ INNER JOIN movie ON favoritedbyfavorite.Movie_ID = movie.Movie_ID;
 
 
 
-/*for Actor-Award python view - need to get movie IDS with actor names*/
+/*movie ID <-> actor name - USED FOR actorswithawards AND actorswithdirectors*/
 CREATE VIEW `movieidswithactornames` AS
 SELECT hasActor.movie_id, hasActor.actor_id, actors.actor_name 
 FROM hasActor 
@@ -86,7 +86,7 @@ INNER JOIN award ON
 award.award_id=hasAward.award_id
 ORDER BY movie_id ASC;
 
-/*actor names with award names!!*/
+/*actor <-> award*/
 CREATE VIEW `actornameswithawardnames` AS
 SELECT movieidswithactornames.actor_id, movieidswithactornames.actor_name, movieidswithawardnames.award_name, movieidswithawardnames.award_id
 FROM movieidswithactornames 
@@ -94,3 +94,16 @@ INNER JOIN movieidswithawardnames ON
 movieidswithawardnames.movie_id=movieidswithactornames.movie_id
 ORDER BY actor_id ASC;
 
+/*movie_id <-> director_id*/
+CREATE VIEW `movieidswithdirectornames` AS SELECT movie.movie_id, movie.director_id, director.director_name
+FROM movie
+INNER JOIN director ON
+movie.director_id = director.director_id
+ORDER BY director_id ASC;
+
+/* actor <-> director VIA movie_id*/
+CREATE VIEW `actornameswithdirectornames` AS SELECT movieidswithdirectornames.movie_id, movieidswithdirectornames.director_name, movieidswithdirectornames.director_id, movieidswithactornames.actor_name, movieidswithactornames.actor_id
+FROM movieidswithactornames
+INNER JOIN movieidswithdirectornames ON
+movieidswithdirectornames.movie_id=movieidswithactornames.movie_id
+ORDER BY movie_id ASC;
