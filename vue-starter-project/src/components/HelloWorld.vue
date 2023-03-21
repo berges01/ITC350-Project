@@ -7,6 +7,8 @@
     <label for="Query">Query:</label>
     <input type="text" id="Query" name="Query" placeholder="SELECT * FROM movie.mash" size="100">
     <input type="submit" value="Execute">
+    <!-- todo add drop down of available queries -->
+    <!-- todo connect backend -->
   </div>
 </template>
 
