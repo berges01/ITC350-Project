@@ -42,7 +42,7 @@ SELECT Title,Genre
 FROM Movie
 ORDER BY Genre ASC;
 
-CREATE VIEW 'selectmovies' AS
+CREATE VIEW `selectmovies` AS
 SELECT *
 FROM movie
 ORDER BY Title ASC;
@@ -74,8 +74,8 @@ INNER JOIN movie ON hasactor.Movie_ID = movie.Movie_ID;
 CREATE VIEW `movieidswithactornames` AS
 SELECT hasActor.movie_id, hasActor.actor_id, actors.actor_name 
 FROM hasActor 
-INNER JOIN actor ON
-actor.id=hasActor.actor_id;
+INNER JOIN actors ON
+actors.id=hasActor.actor_id;
 
 /*getting movieIDs with award names*/
 CREATE VIEW `movieidswithawardnames` AS SELECT hasAward.movie_id, hasAward.award_id, award.award_name
@@ -93,7 +93,7 @@ movieidswithawardnames.movie_id=movieidswithactornames.movie_id
 ORDER BY actor_id ASC;
 
 /*movie_id <-> director_id*/
-CREATE VIEW `movieidswithdirectornames` AS SELECT movie.movie_id, movie.director_id, director.director_name
+CREATE VIEW `movieidswithdirectornames` AS SELECT movie.title, movie.movie_id, movie.director_id, director.director_name
 FROM movie
 INNER JOIN director ON
 movie.director_id = director.director_id
@@ -105,3 +105,9 @@ FROM movieidswithactornames
 INNER JOIN movieidswithdirectornames ON
 movieidswithdirectornames.movie_id=movieidswithactornames.movie_id
 ORDER BY movie_id ASC;
+
+/*movie titles with award names*/
+CREATE VIEW `movienameswithawardnames` AS 
+SELECT movieidswithawardnames.movie_id, movie.title, movieidswithawardnames.award_id, movieidswithawardnames.award_name
+FROM movieidswithawardnames
+INNER JOIN movie ON movieidswithawardnames.movie_id=movie.movie_id;
