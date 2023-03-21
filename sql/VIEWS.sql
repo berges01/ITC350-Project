@@ -64,13 +64,11 @@ FROM users
 INNER JOIN favoritedbyfavorite ON users.UserID = favoritedbyfavorite.UserID
 INNER JOIN movie ON favoritedbyfavorite.Movie_ID = movie.Movie_ID;
 
-
-
-
-
-
-
-
+CREATE VIEW `movieswithactor` AS
+SELECT actors.Actor_Name, actors.Actor_ID, hasactor.Movie_ID, movie.Title
+FROM actors
+INNER JOIN hasactor ON actors.Actor_ID = hasactor.Actor_ID
+INNER JOIN movie ON hasactor.Movie_ID = movie.Movie_ID;
 
 /*movie ID <-> actor name - USED FOR actorswithawards AND actorswithdirectors*/
 CREATE VIEW `movieidswithactornames` AS
