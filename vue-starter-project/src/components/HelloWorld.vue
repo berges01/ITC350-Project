@@ -10,26 +10,25 @@
     <form action="#">
       <label for="lang">Query: </label>
       <select name="queries" id="query" style="width: 700px;">
-        <option value="FavoritedByMe">JavaScript</option>
-        <option value="SortByReleaseDate">PHP</option>
-        <option value="SortByRuntime">Java</option>
-        <option value="SelectGenre">Golang</option>
-        <option value="SortMoviesByTitle">Python</option>
-        <option value="MoviesWithActor">C#</option>
-        <option value="MoviesWithAward">C++</option>
-        <option value="MoviesWithDirector">Erlang</option>
-        <option value="ActorsWithAward">Erlang</option>
-        <option value="AvgMovieRatingByActor">Erlang</option>
-        <option value="AvgMovieRatingByDirector">Erlang</option>
-        <option value="ActorsWithDirector">Erlang</option>
-        <option value="SelectSpecificMovie">Erlang</option>
-        <option value="SelectContentRating">Erlang</option>
-        <option value="MovieRuntimeUnder2hours">Erlang</option>
-        <option value="SelectMoviesReleasedBetween">Erlang</option>
+        <option value="FavoritedByMe">SELECT * FROM movie.mash WHERE FavoritedByMe = uid</option>
+        <option value="SortByReleaseDate">SELECT * FROM movie.mash WHERE releasedate = date</option>
+        <option value="SortByRuntime">SELECT * FROM movie.mash WHERE run</option>
+        <option value="SelectGenre">SELECT * FROM movie.mash WHERE</option>
+        <option value="SortMoviesByTitle">SELECT * FROM movie.mash WHERE</option>
+        <option value="MoviesWithActor">SELECT * FROM movie.mash WHERE</option>
+        <option value="MoviesWithAward">SELECT * FROM movie.mash WHERE</option>
+        <option value="MoviesWithDirector">SELECT * FROM movie.mash WHERE</option>
+        <option value="ActorsWithAward">SELECT * FROM movie.mash WHERE</option>
+        <option value="AvgMovieRatingByActor">SELECT * FROM movie.mash WHERE</option>
+        <option value="AvgMovieRatingByDirector">SELECT * FROM movie.mash WHERE</option>
+        <option value="ActorsWithDirector">SELECT * FROM movie.mash WHERE</option>
+        <option value="SelectSpecificMovie">SELECT * FROM movie.mash WHERE</option>
+        <option value="SelectContentRating">SELECT * FROM movie.mash WHERE</option>
+        <option value="MovieRuntimeUnder2hours">SELECT * FROM movie.mash WHERE</option>
+        <option value="SelectMoviesReleasedBetween">SELECT * FROM movie.mash WHERE</option>
       </select>
-      <input type="submit" value="Submit" />
+      <input type="submit" value="Execute" />
 </form>
-    <!-- todo add drop down of available queries -->
     <!-- todo connect backend -->
   </div>
 </template>
