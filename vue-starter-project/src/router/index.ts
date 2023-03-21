@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import PageNotFound from '@/views/PageNotFound.vue'
+import LoginPage from '@/views/LoginPage.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -12,6 +13,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/:catchAll(.*)*',
     name: 'PageNotFound',
     component: PageNotFound
+  },
+  {
+    path: '/login',
+    name: 'LoginPage',
+    component: LoginPage
   }
   // {
   //   path: '/about',
