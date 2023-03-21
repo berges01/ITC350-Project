@@ -10,14 +10,22 @@
     <form action="#">
       <label for="lang">Query: </label>
       <select name="queries" id="query" style="width: 700px;">
-        <option value="javascript">JavaScript</option>
-        <option value="php">PHP</option>
-        <option value="java">Java</option>
-        <option value="golang">Golang</option>
-        <option value="python">Python</option>
-        <option value="c#">C#</option>
-        <option value="C++">C++</option>
-        <option value="erlang">Erlang</option>
+        <option value="FavoritedByMe">JavaScript</option>
+        <option value="SortByReleaseDate">PHP</option>
+        <option value="SortByRuntime">Java</option>
+        <option value="SelectGenre">Golang</option>
+        <option value="SortMoviesByTitle">Python</option>
+        <option value="MoviesWithActor">C#</option>
+        <option value="MoviesWithAward">C++</option>
+        <option value="MoviesWithDirector">Erlang</option>
+        <option value="ActorsWithAward">Erlang</option>
+        <option value="AvgMovieRatingByActor">Erlang</option>
+        <option value="AvgMovieRatingByDirector">Erlang</option>
+        <option value="ActorsWithDirector">Erlang</option>
+        <option value="SelectSpecificMovie">Erlang</option>
+        <option value="SelectContentRating">Erlang</option>
+        <option value="MovieRuntimeUnder2hours">Erlang</option>
+        <option value="SelectMoviesReleasedBetween">Erlang</option>
       </select>
       <input type="submit" value="Submit" />
 </form>
