@@ -1,12 +1,26 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <p>
-      To execute a query, use the bar below
-    </p>
+    <p>To execute a custom query, use the bar below</p>
     <label for="Query">Query:</label>
     <input type="text" id="Query" name="Query" placeholder="SELECT * FROM movie.mash" size="100">
     <input type="submit" value="Execute">
+    
+    <p>To execute a pre-built query, use the bar below</p>
+    <form action="#">
+      <label for="lang">Query: </label>
+      <select name="queries" id="query" style="width: 700px;">
+        <option value="javascript">JavaScript</option>
+        <option value="php">PHP</option>
+        <option value="java">Java</option>
+        <option value="golang">Golang</option>
+        <option value="python">Python</option>
+        <option value="c#">C#</option>
+        <option value="C++">C++</option>
+        <option value="erlang">Erlang</option>
+      </select>
+      <input type="submit" value="Submit" />
+</form>
     <!-- todo add drop down of available queries -->
     <!-- todo connect backend -->
   </div>
