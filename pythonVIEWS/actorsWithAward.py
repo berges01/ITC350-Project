@@ -1,5 +1,4 @@
 import mysql.connector
-import datetime
 
 def main():
     DataBase = CreateConnection()
@@ -16,30 +15,24 @@ def CreateConnection():
     )
     return DataBase
 
-
+#stolen from selectMovie.py
 def CreateCursor(DataBase):
     #grab input
-    start_year_resp = input("Year Range Start (Input a Year):  ")
-    start_year = int(start_year_resp)
-    end_year_resp = input("Year Range End (Input a Year):  ")
-    end_year = int(end_year_resp)
+    actor_id_response = input("Actor ID to Select:  ")
+    actor_id = int(actor_id_response)
     
     #validate input
-    present_date = datetime.date.today()
-    year = int(present_date.year)
     invalid_response = True
     while invalid_response:
-        if start_year < 0 or end_year > year:
+        if actor_id > 9999 or actor_id < 0: #POTENTIALBUG: select count?
             print('invalid input, try again')
-            start_year_resp = input("Year Range Start (Input a Year):  ")
-            start_year = int(start_year_resp)
-            end_year_resp = input("Year Range End (Input a Year):  ")
-            end_year = int(end_year_resp)
+            actor_id_response = input("Actor_ID to delete:  ")
+            actor_id = int(actor_id_response)
         else: invalid_response = False
     
     #execute query
-    data = (start_year,end_year)
-    query = "SELECT * FROM movie_mash.selectmovie WHERE Release_Year BETWEEN %s AND %s;"
+    data = (actor_id_response,)
+    query = "SELECT actor_id, actor_name, award_name FROM actornameswithawardnames WHERE actor_id = %s;"
     cursor = DataBase.cursor()
     cursor.execute(query,data)
     result = cursor.fetchall()

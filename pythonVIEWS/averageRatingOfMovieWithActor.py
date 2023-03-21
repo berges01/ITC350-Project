@@ -18,26 +18,30 @@ def CreateConnection():
 
 def CreateCursor(DataBase):
     #grab input
-    movie_id_response = input("Movie ID to Select:  ")
-    movie_id = int(movie_id_response)
+    actor_response = input("Actor Name (Exact Match):  ")
+    actor = str(actor_response)
     
     #validate input
     invalid_response = True
     while invalid_response:
-        if movie_id > 9999 or movie_id < 0:
-            print('invalid input, try again')
-            movie_id_response = input("Movie_ID to delete:  ")
-            movie_id = int(movie_id_response)
+        if len(actor) > 100:
+            print('invalid input, response too long.')
+            actor_response = input("Movie Genre (Exact Match):  ")
+            actor = str(actor_response)
         else: invalid_response = False
     
-    #execute query
-    data = (movie_id_response,)
-    query = "SELECT movie_id, title, award_id, award_name FROM movienameswithawardnames WHERE movie_id = %s;"
-    cursor = DataBase.cursor()
+    #execute query to check if genre exists.
+    data = (actor,)
+    query = "SELECT Actor_Name, AVG(IMDB_Rating) FROM movie_mash.averageratingofmoviewithactor WHERE Actor_Name = %s GROUP BY Actor_Name;"
+    cursor = DataBase.cursor(prepared = True)
     cursor.execute(query,data)
     result = cursor.fetchall()
+    count = 0
     for x in result:
+        count = count + 1
         print(x)
+    if count == 0:
+        print('No actor with this name was found. Check Spelling and Punctuation.')
     DataBase.commit()
     DataBase.close()
 

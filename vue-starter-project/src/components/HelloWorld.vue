@@ -1,35 +1,36 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-router" target="_blank" rel="noopener">router</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-vuex" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-typescript" target="_blank" rel="noopener">typescript</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+    <p>To execute a custom query, use the bar below</p>
+    <label for="Query">Query:</label>
+    <input type="text" id="Query" name="Query" placeholder="SELECT * FROM movie.mash" size="100">
+    <input type="submit" value="Execute">
+    
+    <p>To execute a pre-built query, use the bar below</p>
+    <form action="#">
+      <label for="lang">Query: </label>
+      <select name="queries" id="query" style="width: 700px;">
+        <option value="FavoritedByMe">SELECT * FROM movie.mash WHERE FavoritedByMe = uid</option>
+        <option value="SortByReleaseDate">SELECT * FROM movie.mash WHERE releasedate = date</option>
+        <option value="SortByRuntime">SELECT * FROM movie.mash WHERE run</option>
+        <option value="SelectGenre">SELECT * FROM movie.mash WHERE</option>
+        <option value="SortMoviesByTitle">SELECT * FROM movie.mash WHERE</option>
+        <option value="MoviesWithActor">SELECT * FROM movie.mash WHERE</option>
+        <option value="MoviesWithAward">SELECT * FROM movie.mash WHERE</option>
+        <option value="MoviesWithDirector">SELECT * FROM movie.mash WHERE</option>
+        <option value="ActorsWithAward">SELECT * FROM movie.mash WHERE</option>
+        <option value="AvgMovieRatingByActor">SELECT * FROM movie.mash WHERE</option>
+        <option value="AvgMovieRatingByDirector">SELECT * FROM movie.mash WHERE</option>
+        <option value="ActorsWithDirector">SELECT * FROM movie.mash WHERE</option>
+        <option value="SelectSpecificMovie">SELECT * FROM movie.mash WHERE</option>
+        <option value="SelectContentRating">SELECT * FROM movie.mash WHERE</option>
+        <option value="MovieRuntimeUnder2hours">SELECT * FROM movie.mash WHERE</option>
+        <option value="SelectMoviesReleasedBetween">SELECT * FROM movie.mash WHERE</option>
+      </select>
+      <input type="submit" value="Execute" />
+</form>
+    <!-- todo add drop down of available queries -->
+    <!-- todo connect backend -->
   </div>
 </template>
 

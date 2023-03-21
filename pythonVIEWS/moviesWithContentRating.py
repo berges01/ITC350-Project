@@ -18,26 +18,30 @@ def CreateConnection():
 
 def CreateCursor(DataBase):
     #grab input
-    movie_id_response = input("Movie ID to Select:  ")
-    movie_id = int(movie_id_response)
+    rating_response = input("Enter Rating (G,PG,PG-13,R) (Exact Match):  ")
+    rating = str(rating_response)
     
     #validate input
     invalid_response = True
     while invalid_response:
-        if movie_id > 9999 or movie_id < 0:
-            print('invalid input, try again')
-            movie_id_response = input("Movie_ID to delete:  ")
-            movie_id = int(movie_id_response)
+        if len(rating) > 50 or rating not in ["G","PG","PG-13","R"]:
+            print('invalid input, response too long or invalid. Try again.')
+            rating_response = input("Enter Rating (G,PG,PG-13,R) (Exact Match):  ")
+            rating = str(rating_response)
         else: invalid_response = False
     
-    #execute query
-    data = (movie_id,)
-    query = "SELECT * FROM movie_mash.selectmovies WHERE movie_id = %s;"
+    #execute query to check if genre exists.
+    data = (rating,)
+    query = "SELECT Title, Content_Rating FROM movie_mash.selectmovies WHERE Content_Rating = %s ORDER BY Title ASC;"
     cursor = DataBase.cursor(prepared = True)
     cursor.execute(query,data)
     result = cursor.fetchall()
+    count = 0
     for x in result:
+        count = count + 1
         print(x)
+    if count == 0:
+        print('No movies with a content rating of this type were found.')
     DataBase.commit()
     DataBase.close()
 

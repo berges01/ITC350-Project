@@ -15,24 +15,24 @@ def CreateConnection():
     )
     return DataBase
 
-
+#stolen from selectMovie.py
 def CreateCursor(DataBase):
     #grab input
-    movie_id_response = input("Movie ID to Select:  ")
-    movie_id = int(movie_id_response)
+    actor_id_response = input("Actor ID to Select:  ")
+    actor_id = int(actor_id_response)
     
     #validate input
     invalid_response = True
     while invalid_response:
-        if movie_id > 9999 or movie_id < 0:
+        if actor_id > 9999 or actor_id < 0: #POTENTIALBUG: select count?
             print('invalid input, try again')
-            movie_id_response = input("Movie_ID to delete:  ")
-            movie_id = int(movie_id_response)
+            actor_id_response = input("Actor_ID to delete:  ")
+            actor_id = int(actor_id_response)
         else: invalid_response = False
     
-    #execute query
-    data = (movie_id_response,)
-    query = "SELECT movie_id, title, award_id, award_name FROM movienameswithawardnames WHERE movie_id = %s;"
+    #execute query - IF WE WANT SEARCH BY DIRECTOR ID...? NEW DOCUMENT?
+    data = (actor_id_response,)
+    query = "SELECT actor_id, actor_name, director_id, director_name FROM actornameswithdirectornames WHERE actor_id = %s;"
     cursor = DataBase.cursor()
     cursor.execute(query,data)
     result = cursor.fetchall()
