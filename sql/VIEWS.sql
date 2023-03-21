@@ -64,8 +64,10 @@ FROM users
 INNER JOIN favoritedbyfavorite ON users.UserID = favoritedbyfavorite.UserID
 INNER JOIN movie ON favoritedbyfavorite.Movie_ID = movie.Movie_ID;
 
-
-
+CREATE VIEW `averageratingofmoviebydirector` AS
+SELECT movie.Title, director.Director_Name, movie.IMDB_Rating
+FROM movie
+INNER JOIN director ON movie.Director_ID = director.Director_ID;
 
 
 
