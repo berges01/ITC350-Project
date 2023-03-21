@@ -29,7 +29,6 @@
       </select>
       <input type="submit" value="Execute" />
 </form>
-    <!-- todo add drop down of available queries -->
     <!-- todo connect backend -->
   </div>
 </template>
