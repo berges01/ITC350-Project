@@ -1,12 +1,19 @@
 import flask
-#import flask_jwt
+import mysql.connector
+import bcrypt
+import flask_jwt
 from flask_jwt_extended import JWTManager
 import werkzeug
 
 app = flask.Flask(__name__)
-if __name__ == '__main__':
-    app.run(debug=True, host='localhost',port=5000)
 
+DataBase = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    passwd="Viva La Vida2009!",
+    database="movie_mash",
+    port=3306
+)
 
 @app.route('/')
 def root():
@@ -20,7 +27,7 @@ def sign_up():
     lastName = flask.request.json.get('lastName', None)
     response = add_user(firstName,lastName,email,password)
     if response == 0:
-        return 'Successful Authentication!'
+        return 'Successfully joined Movie Mash!'
     elif response == 1:
         return 'Failed to add user.'
 
@@ -41,8 +48,19 @@ def authenticate(username,password): #TODO
     #make call to user DB table for matching creds
 
 def add_user(firstName,lastName,email,password): #TODO
-    #check for duplicate emails.IDs if there are no duplicates return 0 else 1.
-    return 0
+    #check for duplicate emails.IDs if there are no duplicates return 0 else 1.4
+    try:
+        values = (firstName, lastName, email, password)
+        query = 'INSERT INTO users (FirstName, LastName, Email, Passwd) VALUES (%s, %s, %s, %s)'
+        cursor = DataBase.cursor(prepared=True)
+        cursor.execute(query, values)
+        DataBase.commit()
+        print(cursor.rowcount, "record inserted.")
+        return 0
+    except Exception as insert_error:
+        print("DB Insertion Error: %s" % insert_error)
+        return 1
+    
 
 
 @app.route('/user/<user_id>')
