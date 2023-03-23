@@ -2,6 +2,7 @@ import flask
 import mysql.connector
 import bcrypt
 import flask_jwt
+import jsonify
 from flask_jwt_extended import JWTManager
 import werkzeug
 
@@ -18,6 +19,15 @@ DataBase = mysql.connector.connect(
 @app.route('/')
 def root():
     return 'Hi. Good for you you found /'
+
+@app.route('/sortmoviesbytitle/', methods=['GET']) #TODO Jona - works without jsonify but need to figure out how to return as JSON for frontend simplicity
+def sortMoviesByTitle():
+    query_string = 'SELECT * FROM selectmovies'
+    cursor = DataBase.cursor(prepared=True)
+    cursor.execute(query_string)
+    data = cursor.fetchall()
+
+    return jsonify(data)
 
 @app.route('/signup/', methods=['POST'])
 def sign_up():
@@ -42,6 +52,8 @@ def login():
         return 'Authenticated!'
     else:
         return flask.jsonify({'Authentication Error': 'Invalid username or password.'})
+
+
 
 def authenticate(username,password): #TODO
     return username
