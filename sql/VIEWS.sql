@@ -59,9 +59,9 @@ INNER JOIN hasactor ON actors.Actor_ID = hasactor.Actor_ID
 INNER JOIN movie ON hasactor.Movie_ID = movie.Movie_ID;
 
 CREATE VIEW `favoritedmoviesformatted` AS
-SELECT movie.Title, favoritedbyfavorite.UserID, users.FirstName, users.LastName
+SELECT movie.Title, favoritedbyfavorite.Email, users.FirstName, users.LastName
 FROM users
-INNER JOIN favoritedbyfavorite ON users.UserID = favoritedbyfavorite.UserID
+INNER JOIN favoritedbyfavorite ON users.Email = favoritedbyfavorite.Email
 INNER JOIN movie ON favoritedbyfavorite.Movie_ID = movie.Movie_ID;
 
 CREATE VIEW `movieswithactor` AS
@@ -85,7 +85,7 @@ CREATE VIEW `movieidswithactornames` AS
 SELECT hasActor.movie_id, hasActor.actor_id, actors.actor_name 
 FROM hasActor 
 INNER JOIN actors ON
-actors.id=hasActor.actor_id;
+actors.actor_id=hasActor.actor_id;
 
 /*getting movieIDs with award names*/
 CREATE VIEW `movieidswithawardnames` AS SELECT hasAward.movie_id, hasAward.award_id, award.award_name

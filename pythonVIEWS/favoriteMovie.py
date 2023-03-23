@@ -23,21 +23,21 @@ def CreateCursor(DataBase):
         print(" -------------- Favorite Movie------------- ")
         movie_id_response = input("Movie ID to favorite:  ")
         movie_id = int(movie_id_response)
-        user_id_response = input("User ID: ")
-        user_id = int(user_id_response)   
+        user_email_response = input("User Email: ")
+        user_email = user_email_response   
     
         invalid_response = True
         while invalid_response:
-            if user_id < 0 or movie_id < 0:
+            if len(user_email) > 40 or movie_id < 0:
                 movie_id_response = input("Movie ID to favorite:  ")
                 movie_id = int(movie_id_response)
-                user_id_response = input("User ID: ")
-                user_id = int(user_id_response)   
+                user_email_response = input("User ID: ")
+                user_email = user_email_response
             else: invalid_response = False 
         try:
 
-            values = (movie_id, user_id)
-            query = 'INSERT INTO favoritedbyfavorite (Movie_ID, UserID) VALUES (%s, %s)'
+            values = (movie_id, user_email)
+            query = 'INSERT INTO favoritedbyfavorite (Movie_ID, Email) VALUES (%s, %s)'
             cursor = DataBase.cursor(prepared = True)
             cursor.execute(query, values)
             DataBase.commit()

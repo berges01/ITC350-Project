@@ -1,9 +1,12 @@
 import flask
 #import flask_jwt
-#import flask_jwt_extended
+from flask_jwt_extended import JWTManager
 import werkzeug
 
 app = flask.Flask(__name__)
+if __name__ == '__main__':
+    app.run(debug=True, host='localhost',port=5000)
+
 
 @app.route('/')
 def root():
@@ -39,7 +42,7 @@ def authenticate(username,password): #TODO
 
 def add_user(firstName,lastName,email,password): #TODO
     #check for duplicate emails.IDs if there are no duplicates return 0 else 1.
-    return 1
+    return 0
 
 
 @app.route('/user/<user_id>')

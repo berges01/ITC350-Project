@@ -18,21 +18,21 @@ def CreateConnection():
 
 def CreateCursor(DataBase):
     #grab input
-    user_id_response = input("Enter UserID for thier favorite movies:  ")
-    user_id = int(user_id_response)
+    user_email_response = input("Enter user Email for thier favorite movies:  ")
+    user_email = user_email_response
     5
     #validate input
     invalid_response = True
     while invalid_response:
-        if user_id < 0:
+        if len(user_email) > 40:
             print('invalid input, try again')
-            user_id_response = input("Movie ID to Select:  ")
-            user_id = int(user_id_response)
+            user_email_response = input("Enter user Email for thier favorite movies:  ")
+            user_email = user_email_response
         else: invalid_response = False
     
     #execute query
-    data = (user_id,)
-    query = "SELECT Title FROM movie_mash.favoritedmoviesformatted WHERE UserID = %s;"
+    data = (user_email,)
+    query = "SELECT Title FROM movie_mash.favoritedmoviesformatted WHERE Email = %s;"
     cursor = DataBase.cursor(prepared = True)
     cursor.execute(query,data)
     result = cursor.fetchall()

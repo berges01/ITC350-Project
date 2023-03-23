@@ -1,6 +1,6 @@
-FirstName,LastName,UserID,Email
-Jacob,Barnum,0,jacobtb2323@gmail.com
-Caleb,Barton,0,cbarton450@gmail.com
-Jona,Monette,0,monettejona@gmail.com
-Joshua,Haviland,0,jghaviland@gmail.com
-Erik,Burges,0,erik.t.burges@gmail.com
+FirstName,LastName,Email,Passwd
+Jacob,Barnum,jacobtb2323@gmail.com,test123
+Caleb,Barton,cbarton450@gmail.com,passsswrd
+Jona,Monette,monettejona@gmail.com,1234567!
+Joshua,Haviland,jghaviland@gmail.com,DontJudgeMe
+Erik,Burges,erik.t.burges@gmail.com,EBURGEs12!

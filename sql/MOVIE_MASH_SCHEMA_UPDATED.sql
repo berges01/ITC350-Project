@@ -3,8 +3,8 @@ CREATE TABLE Users
   FirstName CHAR(30) NOT NULL,
   LastName CHAR(30) NOT NULL,
   Email CHAR(40),
-  UserID INT NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (UserID)
+  Passwd CHAR(40) NOT NULL,
+  PRIMARY KEY (Email)
 );
 
 CREATE TABLE Director
@@ -46,10 +46,10 @@ CREATE TABLE Movie
 CREATE TABLE FavoritedByFavorite
 (
   Movie_ID INT NOT NULL,
-  UserID INT NOT NULL,
-  PRIMARY KEY (Movie_ID, UserID),
+  Email CHAR(40) NOT NULL,
+  PRIMARY KEY (Movie_ID, Email),
   FOREIGN KEY (Movie_ID) REFERENCES Movie(Movie_ID),
-  FOREIGN KEY (UserID) REFERENCES Users(UserID)
+  FOREIGN KEY (Email) REFERENCES Users(Email)
 );
 
 CREATE TABLE HasActor

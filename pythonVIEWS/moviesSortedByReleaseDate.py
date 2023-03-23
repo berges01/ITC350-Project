@@ -1,6 +1,5 @@
 import mysql.connector
 
-
 def main():
     DataBase = CreateConnection()
     CreateCursor(DataBase)

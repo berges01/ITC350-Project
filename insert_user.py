@@ -25,13 +25,13 @@ def CreateCursor(DataBase):
                 print(FirstName)
                 LastName = row['LastName']
                 print(LastName)
-                UserID = row['UserID']
-                print(UserID)
                 Email = row['Email']
                 print(Email)
+                Passwd = row['Passwd']
+                print(Passwd)
                 try:
-                    values = (FirstName, LastName, UserID, Email)
-                    query = 'INSERT INTO users (FirstName, LastName, UserID, Email) VALUES (%s, %s, %s, %s)'
+                    values = (FirstName, LastName, Email, Passwd)
+                    query = 'INSERT INTO users (FirstName, LastName, Email, Passwd) VALUES (%s, %s, %s, %s)'
                     cursor = DataBase.cursor()
                     cursor.execute(query, values)
                     DataBase.commit()
