@@ -1,12 +1,9 @@
 import flask
 import mysql.connector
 import bcrypt
-import flask_jwt
-from flask_jwt_extended import JWTManager
-import werkzeug
 
+#GLOBAL VARS
 app = flask.Flask(__name__)
-
 DataBase = mysql.connector.connect(
     host="localhost",
     user="root",
@@ -14,6 +11,7 @@ DataBase = mysql.connector.connect(
     database="movie_mash",
     port=3306
 )
+salt = bcrypt.gensalt()
 
 @app.route('/')
 def root():
@@ -22,12 +20,13 @@ def root():
 @app.route('/signup/', methods=['POST'])
 def sign_up():
     password = flask.request.json.get('password', None)
+    hashPass = bcrypt.hashpw(password.encode('utf-8'),salt)
     email = flask.request.json.get('email', None)
     firstName = flask.request.json.get('firstName', None)
     lastName = flask.request.json.get('lastName', None)
-    response = add_user(firstName,lastName,email,password)
+    response = add_user(firstName,lastName,email,hashPass)
     if response == 0:
-        return 'Successfully joined Movie Mash!'
+        return email + ' successfully joined Movie Mash!'
     elif response == 1:
         return 'Failed to add user.'
 
@@ -38,7 +37,7 @@ def login():
     password = flask.request.json.get('password', None)
     response = authenticate(email,password)
     if response:
-        #TODO return access token
+        #TODO return access token or IDentity 
         return 'Authenticated!'
     else:
         return flask.jsonify({'Authentication Error': 'Invalid username or password.'})
