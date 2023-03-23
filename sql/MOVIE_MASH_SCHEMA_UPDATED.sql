@@ -3,7 +3,7 @@ CREATE TABLE Users
   FirstName CHAR(30) NOT NULL,
   LastName CHAR(30) NOT NULL,
   Email CHAR(40),
-  Passwd CHAR(40) NOT NULL,
+  Passwd CHAR(200) NOT NULL,
   PRIMARY KEY (Email)
 );
 
