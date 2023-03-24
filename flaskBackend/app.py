@@ -22,13 +22,37 @@ def root():
     return 'Hi. Good for you you found /'
 
 @app.route('/sortmoviesbytitle/', methods=['GET']) #TODO Jona - works without jsonify but need to figure out how to return as JSON for frontend simplicity
-def sortMoviesByTitle():
+def sort_movies_by_title():
     query_string = 'SELECT * FROM selectmovies'
     cursor = DataBase.cursor(prepared=True)
     cursor.execute(query_string)
     data = cursor.fetchall()
 
     return jsonify(data)
+
+#@app.route('/highlyratedmovies/', methods=['GET']) #TODO HIGHLY RATED MOVIES
+#def sort_movies_by():
+
+#@app.route('/moviesbyreleasedate/', methods=['GET']) #TODO MOVIES SORTED BY RELEASE DATE
+#def sort_movies_by():
+
+#@app.route('/moviesbyruntime/', methods=['GET']) #TODO MOVIES SORTED BY RUNTIME
+#def sort_movies_by():
+
+#@app.route('/moviesundertwohours/', methods=['GET']) #TODO MOVIES UNDER TWO HOURS
+#def sort_movies_by():
+
+#@app.route('/moviesbydirectorname/', methods=['GET']) #TODO MOVIES SORTED BY DIRECTOR NAME
+#def sort_movies_by():
+
+#@app.route('', methods=['GET']) #TODO MOVIES SORTED BY RATING
+#def sort_movies_by():
+
+#@app.route('', methods=['GET']) #TODO MOVIES SORTED BY GENRE
+#def sort_movies_by():
+
+#@app.route('', methods=['GET']) #TODO
+#def sort_movies_by():
 
 @app.route('/signup/', methods=['POST'])
 def sign_up():

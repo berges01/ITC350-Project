@@ -19,7 +19,7 @@ SELECT Title,Running_Time_Minutes
 FROM movie
 WHERE Running_Time_Minutes <= 120;
 
-CREATE VIEW `moviessortedbytitle` AS
+CREATE VIEW `moviessortedbytitle` AS /*THIS IS THE SAME AS selectmovies*/
 SELECT *
 FROM movie
 ORDER BY Title ASC;
@@ -47,7 +47,7 @@ SELECT *
 FROM movie
 ORDER BY Title ASC;
 
-CREATE VIEW `uniquegenre` AS
+CREATE VIEW `uniquegenre` AS /*what is this used for? -Jona*/
 SELECT distinct Genre
 FROM movie
 ORDER BY Genre ASC;
