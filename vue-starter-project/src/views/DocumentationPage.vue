@@ -8,6 +8,4 @@
       <p align = "left">Select all movies and sort them by their release date</p>
       <p align = "left">QUERY</p>
     </div>
-  </template>
-
-  
+</template>

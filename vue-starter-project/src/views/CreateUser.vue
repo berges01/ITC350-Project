@@ -1,12 +1,11 @@
 /* eslint-disable */
 <template>
     <div>
-      <h1>Login Page</h1>
+      <h1>Create User Page</h1>
       <LoginForm/>
-      This is not working!
+      <p>This is not working!</p>
     </div>
-  </template>
-  <!-- todo get the login stuff working -->
+</template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'

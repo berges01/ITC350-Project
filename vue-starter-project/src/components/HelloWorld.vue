@@ -5,7 +5,7 @@
     <label for="Query">Query:</label>
     <input type="text" id="Query" name="Query" placeholder="SELECT * FROM movie.mash" size="100">
     <input type="submit" value="Execute">
-    
+
     <p>To execute a pre-built query, use the bar below</p>
     <form action="#">
       <label for="lang">Query: </label>
