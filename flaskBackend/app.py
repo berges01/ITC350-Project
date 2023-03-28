@@ -94,7 +94,7 @@ def sort_movies_by_title():
     #cursor.execute(query_string)
     #data = cursor.fetchall()
 
-#@app.route('/actorswithdirector/', methods=['GET']) #TODO returns list of directors that have worked with a specified actor
+#@app.route('/actorswithdirector/', methods=['GET']) #TODO returns list of directors that have worked with a PARTICULAR actor
 #def get_actors_with_director():
     #actor_id = flask.request.json.get('actor_id', None)
 
@@ -119,9 +119,10 @@ def sort_movies_by_title():
     #cursor.execute(query_string)
     #data = cursor.fetchall()
 
-#@app.route('/actorsawards/', methods=['GET']) #TODO Return an Actor with their movies' awards
+#@app.route('/actorsawards/', methods=['GET']) #TODO Return a particular Actor with their movies' awards
 #def get_actors_movies_awards():
-
+    #actor_id = flask.request.json.get('actor_id', None)
+    
     #query_string = ''
     #cursor = DataBase.cursor(prepared=True)
     #cursor.execute(query_string)
