@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import PageNotFound from '@/views/PageNotFound.vue'
 import LoginPage from '@/views/LoginPage.vue'
 import DocumentationPage from '@/views/DocumentationPage.vue'
+import CreateUser from '@/views/CreateUser.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -24,6 +25,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/documentation',
     name: 'DocumentationPage',
     component: DocumentationPage
+  },
+  {
+    path: '/createUser',
+    name: 'CreateUser',
+    component: CreateUser
   }
   // {
   //   path: '/about',
