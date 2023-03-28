@@ -31,28 +31,28 @@ def sort_movies_by_title():
     return jsonify(data)
 
 #@app.route('/highlyratedmovies/', methods=['GET']) #TODO HIGHLY RATED MOVIES
-#def sort_movies_by():
+#def get_highly_rated_movies():
 
 #@app.route('/moviesbyreleasedate/', methods=['GET']) #TODO MOVIES SORTED BY RELEASE DATE
-#def sort_movies_by():
+#def sort_movies_by_release():
 
 #@app.route('/moviesbyruntime/', methods=['GET']) #TODO MOVIES SORTED BY RUNTIME
-#def sort_movies_by():
+#def sort_movies_by_runtime():
 
 #@app.route('/moviesundertwohours/', methods=['GET']) #TODO MOVIES UNDER TWO HOURS
-#def sort_movies_by():
+#def get_movies_under_two_hours():
 
 #@app.route('/moviesbydirectorname/', methods=['GET']) #TODO MOVIES SORTED BY DIRECTOR NAME
-#def sort_movies_by():
+#def sort_movies_by_directorname():
 
-#@app.route('', methods=['GET']) #TODO MOVIES SORTED BY RATING
-#def sort_movies_by():
+#@app.route('/moviesbyrating/', methods=['GET']) #TODO MOVIES SORTED BY RATING
+#def sort_movies_by_rating()):
 
-#@app.route('', methods=['GET']) #TODO MOVIES SORTED BY GENRE
-#def sort_movies_by():
+#@app.route('/moviesbygenre/', methods=['GET']) #TODO MOVIES SORTED BY GENRE
+#def sort_movies_by_genre():
 
-#@app.route('', methods=['GET']) #TODO
-#def sort_movies_by():
+#@app.route('/moviesofgenre/', methods=['GET']) #TODO MOVIES OF PARTICULAR GENRE
+#def get_movies_of_genre():
 
 @app.route('/signup/', methods=['POST'])
 def sign_up():
