@@ -39,7 +39,7 @@ def CreateCursor(DataBase):
     
     #execute query
     data = (start_year,end_year)
-    query = "SELECT * FROM movie_mash.selectmovie WHERE Release_Year BETWEEN %s AND %s;"
+    query = "SELECT * FROM movie_mash.selectmovies WHERE Release_Year BETWEEN %s AND %s;"
     cursor = DataBase.cursor(prepared = True)
     cursor.execute(query,data)
     result = cursor.fetchall()

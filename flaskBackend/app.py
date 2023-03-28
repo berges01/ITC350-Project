@@ -157,24 +157,27 @@ def get_movies_under_two_hours():
     #cursor.execute(query_string)
     #data = cursor.fetchall()
 
-#@app.route('/moviesreleasedbetween/', methods=['GET']) #TODO Return mvoies between two dates - JAKE
-#def get_movies_between():
-    #date1 = flask.request.json.get('', None)
-    #date2 = flask.request.json.get('', None)
+@app.route('/moviesreleasedbetween/', methods=['GET']) #TODO Return movies between two dates - JAKE
+def get_movies_between():
+    start_year = flask.request.json.get('date1', None)
+    end_year = flask.request.json.get('date2', None)
+    range = [start_year, end_year]
+    query = "SELECT * FROM movie_mash.selectmovies WHERE Release_Year BETWEEN %s AND %s;"
+    cursor = DataBase.cursor(prepared=True)
+    cursor.execute(query,range)
+    data = cursor.fetchall()
+    json_result = format_response(data,cursor)
+    return json_result
 
-    #query_string = ''
-    #cursor = DataBase.cursor(prepared=True)
-    #cursor.execute(query_string)
-    #data = cursor.fetchall()
-
-#@app.route('/favoritedbyme/', methods=['GET']) #TODO RETURN MOVIES FAVORITED BY ME - JAKE
-#def get_my_favorites():
-    #user_id = flask.request.json.get('user_id', None)
-
-    #query_string = ''
-    #cursor = DataBase.cursor(prepared=True)
-    #cursor.execute(query_string)
-    #data = cursor.fetchall()
+@app.route('/favoritedbyme/', methods=['GET']) #TODO RETURN MOVIES FAVORITED BY ME - JAKE
+def get_my_favorites():
+    user_id = flask.request.json.get('user_id', None)
+    query_string = 'SELECT Title FROM movie_mash.favoritedmoviesformatted WHERE Email = %s'
+    cursor = DataBase.cursor(prepared=True)
+    cursor.execute(query_string, [user_id])
+    data = cursor.fetchall()
+    json_result = format_response(data,cursor)
+    return json_result
 
 @app.route('/signup/', methods=['POST'])
 def sign_up():
@@ -204,7 +207,6 @@ def login():
         return flask.jsonify({'Authentication Error': 'Invalid username or password.'})
 
 
-
 def authenticate(email,password): #TODO
     password = password.encode("utf-8")
     query = "SELECT Passwd FROM movie_mash.users WHERE email = %s"
@@ -222,7 +224,6 @@ def authenticate(email,password): #TODO
             return False
         
         
-
 def add_user(firstName,lastName,email,password): #TODO
     #check for duplicate emails.IDs if there are no duplicates return 0 else 1.
     try:
@@ -249,7 +250,6 @@ def format_response(data,cursor):
     # return the JSON string in the response
     return result_json
     
-@app.route('/user/<user_id>')
-#@flask_jwt.jwt_required()
+@app.route('/user/<user_id>')  #TODO - JAKE
 def view_profile(user_id):
     return user_id
