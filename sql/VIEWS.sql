@@ -1,20 +1,20 @@
-CREATE VIEW `highlyratedmovies` AS
+CREATE VIEW `highlyratedmovies` AS /*used in flask as is*/
 SELECT Title,IMDB_Rating
 FROM movie
 WHERE IMDB_Rating >= 8
 ORDER BY IMDB_Rating DESC;
 
-CREATE VIEW `moviesbyreleasedate` AS
+CREATE VIEW `moviesbyreleasedate` AS /*used in flask as is*/
 SELECT Title,Release_Year
 FROM movie
 ORDER BY Release_Year DESC;
 
-CREATE VIEW `moviesbyruntime` AS
+CREATE VIEW `moviesbyruntime` AS  /*used in flask as is*/
 SELECT Title,Running_Time_Minutes
 FROM movie
 ORDER BY Running_Time_Minutes DESC;
 
-CREATE VIEW `moviesundertwohours` AS
+CREATE VIEW `moviesundertwohours` AS /*used in flask as is*/
 SELECT Title,Running_Time_Minutes
 FROM movie
 WHERE Running_Time_Minutes <= 120;
@@ -25,7 +25,7 @@ FROM movie
 ORDER BY Title ASC;
 
 
-CREATE VIEW `moviesbydirectorname` AS
+CREATE VIEW `moviesbydirectorname` AS /*Queried by director ID in Flask*/
 SELECT movie.Title, director.Director_Name
 FROM movie
 INNER JOIN director ON
@@ -37,28 +37,28 @@ SELECT Title, IMDB_Rating
 FROM movie
 ORDER BY IMDB_Rating DESC;
 
-CREATE VIEW `sortbygenre` AS
+CREATE VIEW `sortbygenre` AS 
 SELECT Title,Genre
 FROM Movie
 ORDER BY Genre ASC;
 
-CREATE VIEW `selectmovies` AS
+CREATE VIEW `selectmovies` AS /*Same as moviessortedbytitle*/
 SELECT *
 FROM movie
 ORDER BY Title ASC;
 
-CREATE VIEW `uniquegenre` AS /*what is this used for? -Jona*/
+CREATE VIEW `uniquegenre` AS /*Choosing by genre? Not used in our views*/
 SELECT distinct Genre
 FROM movie
 ORDER BY Genre ASC;
 
-CREATE VIEW `averageratingofmoviewithactor` AS
+CREATE VIEW `averageratingofmoviewithactor` AS /**/
 SELECT actors.Actor_Name, actors.Actor_ID, hasactor.Movie_ID, movie.IMDB_Rating
 FROM actors
 INNER JOIN hasactor ON actors.Actor_ID = hasactor.Actor_ID
 INNER JOIN movie ON hasactor.Movie_ID = movie.Movie_ID;
 
-CREATE VIEW `favoritedmoviesformatted` AS
+CREATE VIEW `favoritedmoviesformatted` AS 
 SELECT movie.Title, favoritedbyfavorite.Email, users.FirstName, users.LastName
 FROM users
 INNER JOIN favoritedbyfavorite ON users.Email = favoritedbyfavorite.Email
@@ -70,7 +70,7 @@ FROM actors
 INNER JOIN hasactor ON actors.Actor_ID = hasactor.Actor_ID
 INNER JOIN movie ON hasactor.Movie_ID = movie.Movie_ID;
 
-CREATE VIEW `averageratingofmoviebydirector` AS
+CREATE VIEW `averageratingofmoviebydirector` AS /**/
 SELECT movie.Title, director.Director_Name, movie.IMDB_Rating
 FROM movie
 INNER JOIN director ON movie.Director_ID = director.Director_ID;

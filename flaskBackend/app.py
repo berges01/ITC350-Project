@@ -21,7 +21,7 @@ salt = bcrypt.gensalt()
 def root():
     return 'Hi. Good for you you found /'
 
-@app.route('/sortmoviesbytitle/', methods=['GET']) #TODO Jona - works without jsonify but need to figure out how to return as JSON for frontend simplicity
+@app.route('/sortmoviesbytitle/', methods=['GET']) #TODO DO FINAL TESTS
 def sort_movies_by_title():
     query_string = 'SELECT * FROM selectmovies'
     cursor = DataBase.cursor(prepared=True)
@@ -32,27 +32,143 @@ def sort_movies_by_title():
 
 #@app.route('/highlyratedmovies/', methods=['GET']) #TODO HIGHLY RATED MOVIES
 #def get_highly_rated_movies():
+    #query_string = ''
+    #cursor = DataBase.cursor(prepared=True)
+    #cursor.execute(query_string)
+    #data = cursor.fetchall()
 
 #@app.route('/moviesbyreleasedate/', methods=['GET']) #TODO MOVIES SORTED BY RELEASE DATE
 #def sort_movies_by_release():
+    #query_string = ''
+    #cursor = DataBase.cursor(prepared=True)
+    #cursor.execute(query_string)
+    #data = cursor.fetchall()
 
 #@app.route('/moviesbyruntime/', methods=['GET']) #TODO MOVIES SORTED BY RUNTIME
 #def sort_movies_by_runtime():
+    #query_string = ''
+    #cursor = DataBase.cursor(prepared=True)
+    #cursor.execute(query_string)
+    #data = cursor.fetchall()
 
 #@app.route('/moviesundertwohours/', methods=['GET']) #TODO MOVIES UNDER TWO HOURS
 #def get_movies_under_two_hours():
+    #query_string = ''
+    #cursor = DataBase.cursor(prepared=True)
+    #cursor.execute(query_string)
+    #data = cursor.fetchall()
 
 #@app.route('/moviesbydirectorname/', methods=['GET']) #TODO MOVIES SORTED BY DIRECTOR NAME
 #def sort_movies_by_directorname():
+    #query_string = ''
+    #cursor = DataBase.cursor(prepared=True)
+    #cursor.execute(query_string)
+    #data = cursor.fetchall()
 
 #@app.route('/moviesbyrating/', methods=['GET']) #TODO MOVIES SORTED BY RATING
 #def sort_movies_by_rating()):
+    #query_string = ''
+    #cursor = DataBase.cursor(prepared=True)
+    #cursor.execute(query_string)
+    #data = cursor.fetchall()
 
 #@app.route('/moviesbygenre/', methods=['GET']) #TODO MOVIES SORTED BY GENRE
 #def sort_movies_by_genre():
+    #query_string = ''
+    #cursor = DataBase.cursor(prepared=True)
+    #cursor.execute(query_string)
+    #data = cursor.fetchall()
 
 #@app.route('/moviesofgenre/', methods=['GET']) #TODO MOVIES OF PARTICULAR GENRE
 #def get_movies_of_genre():
+    #query_string = ''
+    #cursor = DataBase.cursor(prepared=True)
+    #cursor.execute(query_string)
+    #data = cursor.fetchall()
+
+#@app.route('/specificmovie/', methods=['GET']) #TODO Specific Movie by ID
+#def get_specific_movie():
+
+    #query_string = ''
+    #cursor = DataBase.cursor(prepared=True)
+    #cursor.execute(query_string)
+    #data = cursor.fetchall()
+
+#@app.route('/actorswithdirector/', methods=['GET']) #TODO returns list of directors that have worked with a specified actor
+#def get_actors_with_director():
+    #actor_id = flask.request.json.get('actor_id', None)
+
+    #query_string = ''
+    #cursor = DataBase.cursor(prepared=True)
+    #cursor.execute(query_string)
+    #data = cursor.fetchall()
+
+#@app.route('/avgdirectorsmoviesratings/', methods=['GET']) #TODO Average Director's Movies' Ratings !!!!!!
+#def get_avg_directors_movies_ratings():
+
+    #query_string = ''
+    #cursor = DataBase.cursor(prepared=True)
+    #cursor.execute(query_string)
+    #data = cursor.fetchall()
+
+#@app.route('/avgactorsmoviesratings/', methods=['GET']) #TODO Average Actor's Movies' Ratings !!!!!!
+#def get_avg_actors_movies_ratings():
+
+    #query_string = ''
+    #cursor = DataBase.cursor(prepared=True)
+    #cursor.execute(query_string)
+    #data = cursor.fetchall()
+
+#@app.route('/actorsawards/', methods=['GET']) #TODO Return an Actor with their movies' awards
+#def get_actors_movies_awards():
+
+    #query_string = ''
+    #cursor = DataBase.cursor(prepared=True)
+    #cursor.execute(query_string)
+    #data = cursor.fetchall()
+
+#@app.route('/directorsmovies/', methods=['GET']) #TODO returns all movies by a particular director
+#def get_directors_movies():
+
+    #query_string = ''
+    #cursor = DataBase.cursor(prepared=True)
+    #cursor.execute(query_string)
+    #data = cursor.fetchall()
+
+#@app.route('/movieawards/', methods=['GET']) #TODO get awards for a particular movie
+#def get_movie_awards():
+
+    #query_string = ''
+    #cursor = DataBase.cursor(prepared=True)
+    #cursor.execute(query_string)
+    #data = cursor.fetchall()
+
+#@app.route('/moviesofcontentrating/', methods=['GET']) #TODO 
+#def get_movies_with_content_rating():
+
+    #query_string = ''
+    #cursor = DataBase.cursor(prepared=True)
+    #cursor.execute(query_string)
+    #data = cursor.fetchall()
+
+#@app.route('/moviesreleasedbetween/', methods=['GET']) #TODO Return mvoies between two dates - TAKE INPUT
+#def get_movies_between():
+    #date1 = flask.request.json.get('', None)
+    #date2 = flask.request.json.get('', None)
+
+    #query_string = ''
+    #cursor = DataBase.cursor(prepared=True)
+    #cursor.execute(query_string)
+    #data = cursor.fetchall()
+
+#@app.route('/favoritedbyme/', methods=['GET']) #TODO RETURN MOVIES FAVORITED BY ME
+#def get_my_favorites():
+    #user_id = flask.request.json.get('user_id', None)
+
+    #query_string = ''
+    #cursor = DataBase.cursor(prepared=True)
+    #cursor.execute(query_string)
+    #data = cursor.fetchall()
 
 @app.route('/signup/', methods=['POST'])
 def sign_up():
