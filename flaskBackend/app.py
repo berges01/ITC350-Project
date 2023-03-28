@@ -18,7 +18,7 @@ DataBase = mysql.connector.connect(
 def root():
     return 'Hi. Good for you you found /'
 
-@app.route('/sortmoviesbytitle/', methods=['GET']) #TODO Jona - works without jsonify but need to figure out how to return as JSON for frontend simplicity
+@app.route('/sortmoviesbytitle/', methods=['GET']) #TODO 
 def sort_movies_by_title():
     query_string = 'SELECT * FROM selectmovies'
     cursor = DataBase.cursor(prepared=True)
@@ -27,7 +27,7 @@ def sort_movies_by_title():
     json_result = format_response(data,cursor)
     return json_result
 
-@app.route('/highlyratedmovies/', methods=['GET']) #TODO HIGHLY RATED MOVIES
+@app.route('/highlyratedmovies/', methods=['GET']) #TODO
 def sort_movies_by():
     query_string = "SELECT * FROM movie_mash.highlyratedmovies"
     cursor = DataBase.cursor(prepared=True)
@@ -36,19 +36,23 @@ def sort_movies_by():
     json_result = format_response(data,cursor)
     return json_result
 
-#@app.route('/moviesbyreleasedate/', methods=['GET']) #TODO MOVIES SORTED BY RELEASE DATE
-#def sort_movies_by_release():
-    #query_string = ''
-    #cursor = DataBase.cursor(prepared=True)
-    #cursor.execute(query_string)
-    #data = cursor.fetchall()
+@app.route('/moviesbyreleasedate/', methods=['GET']) #TODO 
+def sort_movies_by_release():
+    query_string = 'SELECT * FROM movie_mash.moviesbyreleasedate'
+    cursor = DataBase.cursor(prepared=True)
+    cursor.execute(query_string)
+    data = cursor.fetchall()
+    json_result = format_response(data,cursor)
+    return json_result
 
-#@app.route('/moviesbyruntime/', methods=['GET']) #TODO MOVIES SORTED BY RUNTIME
-#def sort_movies_by_runtime():
-    #query_string = ''
-    #cursor = DataBase.cursor(prepared=True)
-    #cursor.execute(query_string)
-    #data = cursor.fetchall()
+@app.route('/moviesbyruntime/', methods=['GET']) #TODO 
+def sort_movies_by_runtime():
+    query_string = 'SELECT * FROM movie_mash.moviesbyruntime'
+    cursor = DataBase.cursor(prepared=True)
+    cursor.execute(query_string)
+    data = cursor.fetchall()
+    json_result = format_response(data,cursor)
+    return json_result
 
 #@app.route('/moviesundertwohours/', methods=['GET']) #TODO MOVIES UNDER TWO HOURS
 #def get_movies_under_two_hours():
