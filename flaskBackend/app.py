@@ -2,8 +2,6 @@ import flask
 import mysql.connector
 import bcrypt
 import json
-import flask_jwt
-from flask_jwt_extended import JWTManager
 import werkzeug
 
 #GLOBAL VARS
@@ -15,13 +13,12 @@ DataBase = mysql.connector.connect(
     database="movie_mash",
     port=3306
 )
-salt = bcrypt.gensalt()
 
 @app.route('/')
 def root():
     return 'Hi. Good for you you found /'
 
-@app.route('/sortmoviesbytitle/', methods=['GET']) #TODO Jona - works without jsonify but need to figure out how to return as JSON for frontend simplicity
+@app.route('/sortmoviesbytitle/', methods=['GET'])
 def sort_movies_by_title():
     query_string = 'SELECT * FROM selectmovies'
     cursor = DataBase.cursor(prepared=True)
@@ -30,8 +27,14 @@ def sort_movies_by_title():
     json_result = format_response(data,cursor)
     return json_result
 
-#@app.route('/highlyratedmovies/', methods=['GET']) #TODO HIGHLY RATED MOVIES
-#def sort_movies_by():
+@app.route('/highlyratedmovies/', methods=['GET'])
+def sort_movies_by():
+    query = "SELECT * FROM movie_mash.highlyratedmovies"
+    cursor = DataBase.cursor(prepared=True)
+    cursor.execute(query)
+    data = cursor.fetchall()
+    json_result = format_response(data,cursor)
+    return json_result
 
 #@app.route('/moviesbyreleasedate/', methods=['GET']) #TODO MOVIES SORTED BY RELEASE DATE
 #def sort_movies_by():
@@ -57,15 +60,18 @@ def sort_movies_by_title():
 @app.route('/signup/', methods=['POST'])
 def sign_up():
     password = flask.request.json.get('password', None)
-    hashPass = bcrypt.hashpw(password.encode('utf-8'),salt)
+    encoded_pw = password.encode("utf-8")
+    salt = bcrypt.gensalt()
+    hashPass = bcrypt.hashpw(encoded_pw,salt)
+    hashPass_decoded = hashPass.decode("utf-8")
     email = flask.request.json.get('email', None)
     firstName = flask.request.json.get('firstName', None)
     lastName = flask.request.json.get('lastName', None)
-    response = add_user(firstName,lastName,email,hashPass)
+    response = add_user(firstName,lastName,email,hashPass_decoded)
     if response == 0:
-        return email + ' successfully joined Movie Mash!'
+        return email + ' successfully joined Movie Mash! Please Return to login page to sign in.'
     elif response == 1:
-        return 'Failed to add user.'
+        return 'Failed to add user. Duplicate entry found for email ' + email
 
 
 @app.route('/login/', methods=['POST']) #TODO
@@ -73,20 +79,33 @@ def login():
     email = flask.request.json.get('email', None)
     password = flask.request.json.get('password', None)
     response = authenticate(email,password)
-    if response:
-        #TODO return access token or IDentity 
-        return 'Authenticated!'
-    else:
+    if response == True:
+        return email
+    elif response == False:
         return flask.jsonify({'Authentication Error': 'Invalid username or password.'})
 
 
 
-def authenticate(username,password): #TODO
-    return username
-    #make call to user DB table for matching creds
+def authenticate(email,password): #TODO
+    password = password.encode("utf-8")
+    query = "SELECT Passwd FROM movie_mash.users WHERE email = %s"
+    cursor = DataBase.cursor(prepared=True)
+    cursor.execute(query, [email])
+    result = cursor.fetchone()
+    if result is None:
+        print('User not found.')
+        return False
+    else:
+        stored_hash = result[0].encode("utf-8")
+        if bcrypt.checkpw(password, stored_hash):
+            return True
+        else:
+            return False
+        
+        
 
 def add_user(firstName,lastName,email,password): #TODO
-    #check for duplicate emails.IDs if there are no duplicates return 0 else 1.4
+    #check for duplicate emails.IDs if there are no duplicates return 0 else 1.
     try:
         values = (firstName, lastName, email, password)
         query = 'INSERT INTO users (FirstName, LastName, Email, Passwd) VALUES (%s, %s, %s, %s)'
