@@ -54,42 +54,44 @@ def sort_movies_by_runtime():
     json_result = format_response(data,cursor)
     return json_result
 
-#@app.route('/moviesundertwohours/', methods=['GET']) #TODO MOVIES UNDER TWO HOURS
-#def get_movies_under_two_hours():
-    #query_string = ''
-    #cursor = DataBase.cursor(prepared=True)
-    #cursor.execute(query_string)
-    #data = cursor.fetchall()
+@app.route('/moviesundertwohours/', methods=['GET']) #TODO MOVIES UNDER TWO HOURS
+def get_movies_under_two_hours():
+    query_string = 'SELECT * FROM movie_mash.moviesundertwohours'
+    cursor = DataBase.cursor(prepared=True)
+    cursor.execute(query_string)
+    data = cursor.fetchall()
+    json_result = format_response(data,cursor)
+    return json_result
 
-#@app.route('/moviesbydirectorname/', methods=['GET']) #TODO MOVIES SORTED BY DIRECTOR NAME
+#@app.route('/moviesbydirectorname/', methods=['GET']) #TODO MOVIES SORTED BY DIRECTOR NAME - JOSH
 #def sort_movies_by_directorname():
     #query_string = ''
     #cursor = DataBase.cursor(prepared=True)
     #cursor.execute(query_string)
     #data = cursor.fetchall()
 
-#@app.route('/moviesbyrating/', methods=['GET']) #TODO MOVIES SORTED BY RATING
+#@app.route('/moviesbyrating/', methods=['GET']) #TODO MOVIES SORTED BY RATING - JOSH
 #def sort_movies_by_rating()):
     #query_string = ''
     #cursor = DataBase.cursor(prepared=True)
     #cursor.execute(query_string)
     #data = cursor.fetchall()
 
-#@app.route('/moviesbygenre/', methods=['GET']) #TODO MOVIES SORTED BY GENRE
+#@app.route('/moviesbygenre/', methods=['GET']) #TODO MOVIES SORTED BY GENRE - JOSH
 #def sort_movies_by_genre():
     #query_string = ''
     #cursor = DataBase.cursor(prepared=True)
     #cursor.execute(query_string)
     #data = cursor.fetchall()
 
-#@app.route('/moviesofgenre/', methods=['GET']) #TODO MOVIES OF PARTICULAR GENRE
+#@app.route('/moviesofgenre/', methods=['GET']) #TODO MOVIES OF PARTICULAR GENRE - JOSH
 #def get_movies_of_genre():
     #query_string = ''
     #cursor = DataBase.cursor(prepared=True)
     #cursor.execute(query_string)
     #data = cursor.fetchall()
 
-#@app.route('/specificmovie/', methods=['GET']) #TODO Specific Movie by ID
+#@app.route('/specificmovie/', methods=['GET']) #TODO Specific Movie by ID - JONA
 #def get_specific_movie():
 
     #query_string = ''
@@ -97,7 +99,7 @@ def sort_movies_by_runtime():
     #cursor.execute(query_string)
     #data = cursor.fetchall()
 
-#@app.route('/actorswithdirector/', methods=['GET']) #TODO returns list of directors that have worked with a PARTICULAR actor
+#@app.route('/actorswithdirector/', methods=['GET']) #TODO returns list of directors that have worked with a PARTICULAR actor - JONA
 #def get_actors_with_director():
     #actor_id = flask.request.json.get('actor_id', None)
 
@@ -106,7 +108,7 @@ def sort_movies_by_runtime():
     #cursor.execute(query_string)
     #data = cursor.fetchall()
 
-#@app.route('/avgdirectorsmoviesratings/', methods=['GET']) #TODO Average Director's Movies' Ratings !!!!!!
+#@app.route('/avgdirectorsmoviesratings/', methods=['GET']) #TODO Average Director's Movies' Ratings !!!!!! - JONA
 #def get_avg_directors_movies_ratings():
 
     #query_string = ''
@@ -114,7 +116,7 @@ def sort_movies_by_runtime():
     #cursor.execute(query_string)
     #data = cursor.fetchall()
 
-#@app.route('/avgactorsmoviesratings/', methods=['GET']) #TODO Average Actor's Movies' Ratings !!!!!!
+#@app.route('/avgactorsmoviesratings/', methods=['GET']) #TODO Average Actor's Movies' Ratings !!!!!! - JONA
 #def get_avg_actors_movies_ratings():
 
     #query_string = ''
@@ -122,7 +124,7 @@ def sort_movies_by_runtime():
     #cursor.execute(query_string)
     #data = cursor.fetchall()
 
-#@app.route('/actorsawards/', methods=['GET']) #TODO Return a particular Actor with their movies' awards
+#@app.route('/actorsawards/', methods=['GET']) #TODO Return a particular Actor with their movies' awards - JONA
 #def get_actors_movies_awards():
     #actor_id = flask.request.json.get('actor_id', None)
     
@@ -131,7 +133,7 @@ def sort_movies_by_runtime():
     #cursor.execute(query_string)
     #data = cursor.fetchall()
 
-#@app.route('/directorsmovies/', methods=['GET']) #TODO returns all movies by a particular director
+#@app.route('/directorsmovies/', methods=['GET']) #TODO returns all movies by a particular director - JAKE
 #def get_directors_movies():
 
     #query_string = ''
@@ -139,7 +141,7 @@ def sort_movies_by_runtime():
     #cursor.execute(query_string)
     #data = cursor.fetchall()
 
-#@app.route('/movieawards/', methods=['GET']) #TODO get awards for a particular movie
+#@app.route('/movieawards/', methods=['GET']) #TODO get awards for a particular movie - JAKE
 #def get_movie_awards():
 
     #query_string = ''
@@ -147,7 +149,7 @@ def sort_movies_by_runtime():
     #cursor.execute(query_string)
     #data = cursor.fetchall()
 
-#@app.route('/moviesofcontentrating/', methods=['GET']) #TODO 
+#@app.route('/moviesofcontentrating/', methods=['GET']) #TODO - JAKE 
 #def get_movies_with_content_rating():
 
     #query_string = ''
@@ -155,7 +157,7 @@ def sort_movies_by_runtime():
     #cursor.execute(query_string)
     #data = cursor.fetchall()
 
-#@app.route('/moviesreleasedbetween/', methods=['GET']) #TODO Return mvoies between two dates - TAKE INPUT
+#@app.route('/moviesreleasedbetween/', methods=['GET']) #TODO Return mvoies between two dates - JAKE
 #def get_movies_between():
     #date1 = flask.request.json.get('', None)
     #date2 = flask.request.json.get('', None)
@@ -165,7 +167,7 @@ def sort_movies_by_runtime():
     #cursor.execute(query_string)
     #data = cursor.fetchall()
 
-#@app.route('/favoritedbyme/', methods=['GET']) #TODO RETURN MOVIES FAVORITED BY ME
+#@app.route('/favoritedbyme/', methods=['GET']) #TODO RETURN MOVIES FAVORITED BY ME - JAKE
 #def get_my_favorites():
     #user_id = flask.request.json.get('user_id', None)
 
