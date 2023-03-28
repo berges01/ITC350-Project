@@ -1,8 +1,8 @@
 import flask
 import mysql.connector
 import bcrypt
+import json
 import flask_jwt
-import jsonify
 from flask_jwt_extended import JWTManager
 import werkzeug
 
@@ -27,8 +27,8 @@ def sort_movies_by_title():
     cursor = DataBase.cursor(prepared=True)
     cursor.execute(query_string)
     data = cursor.fetchall()
-
-    return jsonify(data)
+    json_result = format_response(data,cursor)
+    return json_result
 
 #@app.route('/highlyratedmovies/', methods=['GET']) #TODO HIGHLY RATED MOVIES
 #def sort_movies_by():
@@ -99,8 +99,18 @@ def add_user(firstName,lastName,email,password): #TODO
         print("DB Insertion Error: %s" % insert_error)
         return 1
     
-
-
+def format_response(data,cursor):
+    result_list = []
+    for row in data:
+        result_dict = {}
+        for i in range(len(cursor.description)):
+            result_dict[cursor.description[i][0]] = row[i]
+        result_list.append(result_dict)
+    # convert the result list to a JSON string
+    result_json = json.dumps(result_list)
+    # return the JSON string in the response
+    return result_json
+    
 @app.route('/user/<user_id>')
 #@flask_jwt.jwt_required()
 def view_profile(user_id):
