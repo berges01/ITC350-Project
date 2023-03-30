@@ -63,33 +63,41 @@ def get_movies_under_two_hours():
     json_result = format_response(data,cursor)
     return json_result
 
-#@app.route('/moviesbydirectorname/', methods=['GET']) #TODO MOVIES SORTED BY DIRECTOR NAME - JOSH
-#def sort_movies_by_directorname():
-    #query_string = ''
-    #cursor = DataBase.cursor(prepared=True)
-    #cursor.execute(query_string)
-    #data = cursor.fetchall()
+@app.route('/moviesbydirectorname/', methods=['GET']) #TODO MOVIES SORTED BY DIRECTOR NAME - JOSH
+def sort_movies_by_directorname():
+    query_string = 'SELECT movie.Title, director.Director_Name FROM movie_mash.moviesbydirectorname'
+    cursor = DataBase.cursor(prepared=True)
+    cursor.execute(query_string)
+    data = cursor.fetchall()
+    json_result = format_response(data,cursor)
+    return json_result
 
-#@app.route('/moviesbyrating/', methods=['GET']) #TODO MOVIES SORTED BY RATING - JOSH
-#def sort_movies_by_rating()):
-    #query_string = ''
-    #cursor = DataBase.cursor(prepared=True)
-    #cursor.execute(query_string)
-    #data = cursor.fetchall()
+@app.route('/moviesbyrating/', methods=['GET']) #TODO MOVIES SORTED BY RATING - JOSH
+def sort_movies_by_rating():
+    query_string = 'SELECT Title, IMDB_Rating FROM movie_mash.sortbyrating'
+    cursor = DataBase.cursor(prepared=True)
+    cursor.execute(query_string)
+    data = cursor.fetchall()
+    json_result = format_response(data,cursor)
+    return json_result
 
-#@app.route('/moviesbygenre/', methods=['GET']) #TODO MOVIES SORTED BY GENRE - JOSH
-#def sort_movies_by_genre():
-    #query_string = ''
-    #cursor = DataBase.cursor(prepared=True)
-    #cursor.execute(query_string)
-    #data = cursor.fetchall()
+@app.route('/moviesbygenre/', methods=['GET']) #TODO MOVIES SORTED BY GENRE - JOSH
+def sort_movies_by_genre():
+    query_string = 'SELECT Title, Genre FROM movie_mash.sortbygenre'
+    cursor = DataBase.cursor(prepared=True)
+    cursor.execute(query_string)
+    data = cursor.fetchall()
+    json_result = format_response(data,cursor)
+    return json_result
 
-#@app.route('/moviesofgenre/', methods=['GET']) #TODO MOVIES OF PARTICULAR GENRE - JOSH
-#def get_movies_of_genre():
-    #query_string = ''
-    #cursor = DataBase.cursor(prepared=True)
-    #cursor.execute(query_string)
-    #data = cursor.fetchall()
+@app.route('/moviesofgenre/', methods=['GET']) #TODO MOVIES OF PARTICULAR GENRE - JOSH
+def get_movies_of_genre():
+    query_string = 'SELECT distinct Genre, FROM movie_mash.uniquegenre'
+    cursor = DataBase.cursor(prepared=True)
+    cursor.execute(query_string)
+    data = cursor.fetchall()
+    json_result = format_response(data,cursor)
+    return json_result
 
 @app.route('/specificmovie/', methods=['GET']) #TODO Specific Movie by ID - JONA - STATUS: TEST API
 def get_specific_movie():
