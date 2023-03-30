@@ -275,7 +275,7 @@ def format_response(data,cursor):
     for row in data:
         result_dict = {}
         for i in range(len(cursor.description)):
-            result_dict[cursor.description[i][0]] = row[i]
+            result_dict[cursor.description[i][0]] = str(row[i])
         result_list.append(result_dict)
     # convert the result list to a JSON string
     result_json = json.dumps(result_list)
