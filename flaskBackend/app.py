@@ -157,15 +157,18 @@ def get_actors_movies_awards():
     #cursor.execute(query_string)
     #data = cursor.fetchall()
 
-#@app.route('/moviesofcontentrating/', methods=['GET']) #TODO - JAKE 
-#def get_movies_with_content_rating():
+@app.route('/moviesofcontentrating/', methods=['GET']) #Return movies with a certain content rating (G,PG,PG-13,R)
+def get_movies_with_content_rating():
+    content_rating = flask.request.json.get('content_rating', None)
+    values = (content_rating,)
+    query = "SELECT Title, Content_Rating FROM movie_mash.selectmovies WHERE Content_Rating = %s ORDER BY Title ASC;"
+    cursor = DataBase.cursor(prepared = True)
+    cursor.execute(query,values)
+    data = cursor.fetchall()
+    json_result = format_response(data,cursor)
+    return json_result
 
-    #query_string = ''
-    #cursor = DataBase.cursor(prepared=True)
-    #cursor.execute(query_string)
-    #data = cursor.fetchall()
-
-@app.route('/moviesreleasedbetween/', methods=['GET']) #TODO Return movies between two dates - JAKE
+@app.route('/moviesreleasedbetween/', methods=['GET']) #Return movies between two dates.
 def get_movies_between():
     start_year = flask.request.json.get('date1', None)
     end_year = flask.request.json.get('date2', None)
@@ -177,7 +180,7 @@ def get_movies_between():
     json_result = format_response(data,cursor)
     return json_result
 
-@app.route('/favoritedbyme/', methods=['GET']) #TODO RETURN MOVIES FAVORITED BY ME - JAKE
+@app.route('/favoritedbyme/', methods=['GET']) #RETURN MOVIES FAVORITED BY ME.
 def get_my_favorites():
     user_id = flask.request.json.get('user_id', None)
     query_string = 'SELECT Title FROM movie_mash.favoritedmoviesformatted WHERE Email = %s'
