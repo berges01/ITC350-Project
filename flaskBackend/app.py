@@ -18,7 +18,7 @@ DataBase = mysql.connector.connect(
 def root():
     return 'Hi. Good for you you found /'
 
-@app.route('/sortmoviesbytitle/', methods=['GET']) #TODO 
+@app.route('/sortmoviesbytitle/', methods=['GET']) #Sort movies by title.
 def sort_movies_by_title():
     query_string = 'SELECT * FROM selectmovies'
     cursor = DataBase.cursor(prepared=True)
@@ -27,7 +27,7 @@ def sort_movies_by_title():
     json_result = format_response(data,cursor)
     return json_result
 
-@app.route('/highlyratedmovies/', methods=['GET']) #TODO
+@app.route('/highlyratedmovies/', methods=['GET']) #Returns movies rated above 7.
 def sort_movies_by():
     query_string = "SELECT * FROM movie_mash.highlyratedmovies"
     cursor = DataBase.cursor(prepared=True)
@@ -36,7 +36,7 @@ def sort_movies_by():
     json_result = format_response(data,cursor)
     return json_result
 
-@app.route('/moviesbyreleasedate/', methods=['GET']) #TODO 
+@app.route('/moviesbyreleasedate/', methods=['GET']) #Sorts movies by release dates.
 def sort_movies_by_release():
     query_string = 'SELECT * FROM movie_mash.moviesbyreleasedate'
     cursor = DataBase.cursor(prepared=True)
@@ -45,7 +45,7 @@ def sort_movies_by_release():
     json_result = format_response(data,cursor)
     return json_result
 
-@app.route('/moviesbyruntime/', methods=['GET']) #TODO 
+@app.route('/moviesbyruntime/', methods=['GET']) #Sorts movies by runtime.
 def sort_movies_by_runtime():
     query_string = 'SELECT * FROM movie_mash.moviesbyruntime'
     cursor = DataBase.cursor(prepared=True)
@@ -54,7 +54,7 @@ def sort_movies_by_runtime():
     json_result = format_response(data,cursor)
     return json_result
 
-@app.route('/moviesundertwohours/', methods=['GET']) #TODO MOVIES UNDER TWO HOURS
+@app.route('/moviesundertwohours/', methods=['GET']) #MOVIES UNDER TWO HOURS
 def get_movies_under_two_hours():
     query_string = 'SELECT * FROM movie_mash.moviesundertwohours'
     cursor = DataBase.cursor(prepared=True)
@@ -63,16 +63,16 @@ def get_movies_under_two_hours():
     json_result = format_response(data,cursor)
     return json_result
 
-@app.route('/moviesbydirectorname/', methods=['GET']) #TODO MOVIES SORTED BY DIRECTOR NAME - JOSH
+@app.route('/moviesbydirectorname/', methods=['GET']) #MOVIES SORTED BY DIRECTOR NAME
 def sort_movies_by_directorname():
-    query_string = 'SELECT movie.Title, director.Director_Name FROM movie_mash.moviesbydirectorname'
+    query_string = 'SELECT * FROM movie_mash.moviesbydirectorname'
     cursor = DataBase.cursor(prepared=True)
     cursor.execute(query_string)
     data = cursor.fetchall()
     json_result = format_response(data,cursor)
     return json_result
 
-@app.route('/moviesbyrating/', methods=['GET']) #TODO MOVIES SORTED BY RATING - JOSH
+@app.route('/moviesbyrating/', methods=['GET']) #MOVIES SORTED BY RATING
 def sort_movies_by_rating():
     query_string = 'SELECT Title, IMDB_Rating FROM movie_mash.sortbyrating'
     cursor = DataBase.cursor(prepared=True)
@@ -81,7 +81,7 @@ def sort_movies_by_rating():
     json_result = format_response(data,cursor)
     return json_result
 
-@app.route('/moviesbygenre/', methods=['GET']) #TODO MOVIES SORTED BY GENRE - JOSH
+@app.route('/moviesbygenre/', methods=['GET']) #MOVIES SORTED BY GENRE
 def sort_movies_by_genre():
     query_string = 'SELECT Title, Genre FROM movie_mash.sortbygenre'
     cursor = DataBase.cursor(prepared=True)
@@ -90,13 +90,15 @@ def sort_movies_by_genre():
     json_result = format_response(data,cursor)
     return json_result
 
-@app.route('/moviesofgenre/', methods=['GET']) #TODO MOVIES OF PARTICULAR GENRE - JOSH
+@app.route('/movieswithgenre/', methods=['GET']) #MOVIES OF PARTICULAR GENRE
 def get_movies_of_genre():
-    query_string = 'SELECT distinct Genre, FROM movie_mash.uniquegenre'
+    genre = flask.request.json.get('genre', None)
+    query_string = 'SELECT Title, Genre FROM movie_mash.sortbygenre WHERE Genre = %s'
+    data = (genre,)
     cursor = DataBase.cursor(prepared=True)
-    cursor.execute(query_string)
-    data = cursor.fetchall()
-    json_result = format_response(data,cursor)
+    cursor.execute(query_string,data)
+    result = cursor.fetchall()
+    json_result = format_response(result,cursor)
     return json_result
 
 @app.route('/specificmovie/', methods=['GET']) #TODO Specific Movie by ID - JONA - STATUS: TEST API
@@ -149,21 +151,27 @@ def get_actors_movies_awards():
     json_result = format_response(data,cursor)
     return json_result
 
-#@app.route('/directorsmovies/', methods=['GET']) #TODO returns all movies by a particular director - JAKE
-#def get_directors_movies():
+@app.route('/directorsmovies/', methods=['GET']) #TODO returns all movies by a particular director - JAKE
+def get_directors_movies():
+    director_id = flask.request.json.get('director_id', None)
+    data = (director_id,)
+    query = "SELECT title, director_name FROM movieidswithdirectornames WHERE director_id = %s;"
+    cursor = DataBase.cursor(prepared=True)
+    cursor.execute(query,data)
+    result = cursor.fetchall()
+    json_result = format_response(result,cursor)
+    return json_result
 
-    #query_string = ''
-    #cursor = DataBase.cursor(prepared=True)
-    #cursor.execute(query_string)
-    #data = cursor.fetchall()
-
-#@app.route('/movieawards/', methods=['GET']) #TODO get awards for a particular movie - JAKE
-#def get_movie_awards():
-
-    #query_string = ''
-    #cursor = DataBase.cursor(prepared=True)
-    #cursor.execute(query_string)
-    #data = cursor.fetchall()
+@app.route('/moviesawards/', methods=['GET']) #TODO get awards for a particular movie - JAKE
+def get_movie_awards():
+    movie_id = flask.request.json.get('movie_id', None)
+    data = (movie_id,)
+    query = "SELECT * FROM movienameswithawardnames WHERE movie_id = %s;"
+    cursor = DataBase.cursor(prepared=True)
+    cursor.execute(query,data)
+    result = cursor.fetchall()
+    json_result = format_response(result,cursor)
+    return json_result
 
 @app.route('/moviesofcontentrating/', methods=['GET']) #Return movies with a certain content rating (G,PG,PG-13,R)
 def get_movies_with_content_rating():
