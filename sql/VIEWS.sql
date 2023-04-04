@@ -39,7 +39,7 @@ ORDER BY IMDB_Rating DESC;
 
 CREATE VIEW `sortbygenre` AS 
 SELECT Title,Genre
-FROM Movie
+FROM movie
 ORDER BY Genre ASC;
 
 CREATE VIEW `selectmovies` AS /*Same as moviessortedbytitle*/
