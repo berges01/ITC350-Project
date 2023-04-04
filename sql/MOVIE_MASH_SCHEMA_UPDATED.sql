@@ -40,7 +40,7 @@ CREATE TABLE movie
   IMDB_Link TEXT(500) NOT NULL,
   Director_ID INT NOT NULL,
   PRIMARY KEY (Movie_ID),
-  FOREIGN KEY (Director_ID) REFERENCES Director(Director_ID)
+  FOREIGN KEY (Director_ID) REFERENCES director(Director_ID)
 );
 
 CREATE TABLE favoritedbyfavorite
@@ -48,8 +48,8 @@ CREATE TABLE favoritedbyfavorite
   Movie_ID INT NOT NULL,
   Email CHAR(40) NOT NULL,
   PRIMARY KEY (Movie_ID, Email),
-  FOREIGN KEY (Movie_ID) REFERENCES Movie(Movie_ID),
-  FOREIGN KEY (Email) REFERENCES Users(Email)
+  FOREIGN KEY (Movie_ID) REFERENCES movie(Movie_ID),
+  FOREIGN KEY (Email) REFERENCES users(Email)
 );
 
 CREATE TABLE hasactor
@@ -57,8 +57,8 @@ CREATE TABLE hasactor
   Movie_ID INT NOT NULL,
   Actor_ID INT NOT NULL,
   PRIMARY KEY (Movie_ID, Actor_ID),
-  FOREIGN KEY (Movie_ID) REFERENCES Movie(Movie_ID),
-  FOREIGN KEY (Actor_ID) REFERENCES Actors(Actor_ID)
+  FOREIGN KEY (Movie_ID) REFERENCES movie(Movie_ID),
+  FOREIGN KEY (Actor_ID) REFERENCES actors(Actor_ID)
 );
 
 CREATE TABLE hasaward
@@ -66,6 +66,6 @@ CREATE TABLE hasaward
   Award_ID INT NOT NULL,
   Movie_ID INT NOT NULL,
   PRIMARY KEY (Award_ID, Movie_ID),
-  FOREIGN KEY (Award_ID) REFERENCES Award(Award_ID),
-  FOREIGN KEY (Movie_ID) REFERENCES Movie(Movie_ID)
+  FOREIGN KEY (Award_ID) REFERENCES award(Award_ID),
+  FOREIGN KEY (Movie_ID) REFERENCES movie(Movie_ID)
 );
