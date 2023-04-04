@@ -1,4 +1,7 @@
 import mysql.connector
+from dotenv import load_dotenv
+import os
+
 
 def main():
     DataBase = CreateConnection()
@@ -9,7 +12,7 @@ def CreateConnection():
     DataBase = mysql.connector.connect(
         host="localhost",
         user="root",
-        passwd="Viva La Vida2009!",
+        passwd=os.environ.get("passwd"),
         database="movie_mash",
         port=3306
     )
