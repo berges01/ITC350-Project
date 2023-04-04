@@ -101,52 +101,57 @@ def get_movies_of_genre():
     json_result = format_response(result,cursor)
     return json_result
 
-@app.route('/specificmovie/', methods=['GET']) #TODO Specific Movie by ID - JONA - STATUS: TEST API
+@app.route('/specificmovie/', methods=['GET']) #Specific Movie by ID - JONA - FINISHED
 def get_specific_movie():
     movie_id = flask.request.json.get('movie_id', None)
+    values=(movie_id,)
     query_string = 'SELECT * FROM movie_mash.moviessortedbytitle WHERE movie_id = %s'
     cursor = DataBase.cursor(prepared=True)
-    cursor.execute(query_string, movie_id)
+    cursor.execute(query_string, values)
     data = cursor.fetchall()
     json_result = format_response(data,cursor)
     return json_result
 
-@app.route('/actorswithdirector/', methods=['GET']) #TODO returns list of directors that have worked with a PARTICULAR actor - JONA - STATUS: TEST API
+@app.route('/actorswithdirector/', methods=['GET']) #returns list of directors that have worked with a PARTICULAR actor - JONA - FINISHED
 def get_actors_with_director():
     actor_name = flask.request.json.get('actor_name', None)
+    values = (actor_name,)
     query_string = 'SELECT * FROM movie_mash.actornameswithdirectornames WHERE actor_name = %s'
     cursor = DataBase.cursor(prepared=True)
-    cursor.execute(query_string, actor_name)
+    cursor.execute(query_string, values)
     data = cursor.fetchall()
     json_result = format_response(data,cursor)
     return json_result
 
-@app.route('/avgdirectorsmoviesratings/', methods=['GET']) #TODO Average Director's Movies' Ratings - JONA - STATUS: TEST SQL FIRST
+@app.route('/avgdirectorsmoviesratings/', methods=['GET']) #TODO Average Director's Movies' Ratings - JONA - FINISHED
 def get_avg_directors_movies_ratings():
     director_name = flask.request.json.get('director_name', None)
-    query_string = 'SELECT AVG(movie_rating) (SELECT * FROM movie_mash.averageratingofmoviebydirector WHERE director_name = %s)' #DO WE NEED MORE FIELDS
+    values = (director_name,)
+    query_string = 'SELECT Director_Name, AVG(IMDB_Rating) FROM movie_mash.averageratingofmoviebydirector WHERE Director_Name = %s GROUP BY Director_Name;' 
     cursor = DataBase.cursor(prepared=True)
-    cursor.execute(query_string, director_name)
+    cursor.execute(query_string, values)
     data = cursor.fetchall()
     json_result = format_response(data,cursor)
     return json_result
 
-@app.route('/avgactorsmoviesratings/', methods=['GET']) #TODO Average Actor's Movies' Ratings - JONA - STATUS: TEST SQL FIRST
+@app.route('/avgactorsmoviesratings/', methods=['GET']) #TODO Average Actor's Movies' Ratings - JONA - STATUS: FINISHED
 def get_avg_actors_movies_ratings():
     actor_name = flask.request.json.get('actor_name', None)
-    query_string = 'SELECT AVG(movie_rating) (SELECT * FROM movie_mash.averageratingofmoviewithactor WHERE actor_name = %s)' #DO WE NEED MORE FIELDS
+    values = (actor_name,)
+    query_string = 'SELECT Actor_Name, AVG(IMDB_Rating) FROM movie_mash.averageratingofmoviewithactor WHERE Actor_Name = %s GROUP BY Actor_Name;'
     cursor = DataBase.cursor(prepared=True)
-    cursor.execute(query_string, actor_name)
+    cursor.execute(query_string, values)
     data = cursor.fetchall()
     json_result = format_response(data,cursor)
     return json_result
 
-@app.route('/actorsawards/', methods=['GET']) #TODO Return a particular Actor with their movies' awards - JONA - STATUS: TEST API
+@app.route('/actorsawards/', methods=['GET']) #TODO Return a particular Actor with their movies' awards - JONA - FINISHED
 def get_actors_movies_awards():
     actor_name = flask.request.json.get('actor_name', None)
+    values = (actor_name,)
     query_string = 'SELECT * FROM movie_mash.actornameswithawardnames WHERE actor_name = %s'
     cursor = DataBase.cursor(prepared=True)
-    cursor.execute(query_string, actor_name)
+    cursor.execute(query_string, values)
     data = cursor.fetchall()
     json_result = format_response(data,cursor)
     return json_result
