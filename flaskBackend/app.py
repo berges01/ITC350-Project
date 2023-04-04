@@ -238,6 +238,38 @@ def login():
     elif response == False:
         return flask.jsonify({'Authentication Error': 'Invalid username or password.'})
 
+@app.route('/user/') 
+def view_profile():
+    email = flask.request.json.get('email', None)
+    query_string = 'SELECT * FROM movie_mash.users WHERE Email = %s'
+    cursor = DataBase.cursor(prepared=True)
+    cursor.execute(query_string, [email])
+    data = cursor.fetchall()
+    json_result = format_response(data,cursor)
+    return json_result
+
+@app.route('/customsql/') 
+def custom_sql():
+    query_string = flask.request.json.get('sql', None)
+    legality = sanitize_input(query_string)
+    if legality == True:
+        cursor = DataBase.cursor(prepared=True)
+        cursor.execute(query_string)
+        data = cursor.fetchall()
+        json_result = format_response(data,cursor)
+        return json_result
+    else:
+        return "Illegal SQL. Please only use not destructive and non modifying SQL queries..."
+
+def sanitize_input(sql):
+    danger_strings = ["drop", "delete", "update", "insert", "add", "alter", "backup", "create", "replace", "table", "set", "users"]
+    lowercase_sql = str(sql.lower())
+    legal = True
+    for keyword in danger_strings:
+        if keyword in lowercase_sql:
+            legal = False
+    return legal
+
 
 def authenticate(email,password): #TODO
     password = password.encode("utf-8")
@@ -281,25 +313,5 @@ def format_response(data,cursor):
     result_json = json.dumps(result_list)
     # return the JSON string in the response
     return result_json
-    
-@app.route('/user/') 
-def view_profile():
-    email = flask.request.json.get('email', None)
-    query_string = 'SELECT * FROM movie_mash.users WHERE Email = %s'
-    cursor = DataBase.cursor(prepared=True)
-    cursor.execute(query_string, [email])
-    data = cursor.fetchall()
-    json_result = format_response(data,cursor)
-    return json_result
 
-@app.route('/customsql/') 
-def custom_sql():
-    # email = flask.request.json.get('email', None)
-    # query_string = 'SELECT * FROM movie_mash.users WHERE Email = %s'
-    # cursor = DataBase.cursor(prepared=True)
-    # cursor.execute(query_string, [email])
-    # data = cursor.fetchall()
-    # json_result = format_response(data,cursor)
-    # return json_result
-    return 1
 
