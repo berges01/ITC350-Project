@@ -14,6 +14,7 @@ DataBase = mysql.connector.connect(
     user="root",
     passwd=os.environ.get('passwd'),
     database="movie_mash",
+    use_pure=True,
     port=3306
 )
 
