@@ -1,14 +1,18 @@
+from dotenv import load_dotenv
+load_dotenv()
+
 import flask
 import mysql.connector
 import bcrypt
 import json
+import os
 
 #GLOBAL VARS
 app = flask.Flask(__name__)
 DataBase = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="Viva La Vida2009!",
+    passwd=os.environ.get('passwd'),
     database="movie_mash",
     port=3306
 )
