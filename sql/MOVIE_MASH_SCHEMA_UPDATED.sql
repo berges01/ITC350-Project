@@ -1,4 +1,4 @@
-CREATE TABLE Users
+CREATE TABLE users
 (
   FirstName CHAR(30) NOT NULL,
   LastName CHAR(30) NOT NULL,
@@ -7,28 +7,28 @@ CREATE TABLE Users
   PRIMARY KEY (Email)
 );
 
-CREATE TABLE Director
+CREATE TABLE director
 (
   Director_Name CHAR(50) NOT NULL,
   Director_ID INT NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (Director_ID)
 );
 
-CREATE TABLE Actors
+CREATE TABLE actors
 (
   Actor_Name CHAR(50) NOT NULL,
   Actor_ID INT NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (Actor_ID)
 );
 
-CREATE TABLE Award
+CREATE TABLE award
 (
   Award_Name CHAR(50) NOT NULL,
   Award_ID INT NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (Award_ID)
 );
 
-CREATE TABLE Movie
+CREATE TABLE movie
 (
   Title CHAR(50) NOT NULL,
   Release_Year INT(4) NOT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE Movie
   FOREIGN KEY (Director_ID) REFERENCES Director(Director_ID)
 );
 
-CREATE TABLE FavoritedByFavorite
+CREATE TABLE favoritedbyfavorite
 (
   Movie_ID INT NOT NULL,
   Email CHAR(40) NOT NULL,
@@ -52,7 +52,7 @@ CREATE TABLE FavoritedByFavorite
   FOREIGN KEY (Email) REFERENCES Users(Email)
 );
 
-CREATE TABLE HasActor
+CREATE TABLE hasactor
 (
   Movie_ID INT NOT NULL,
   Actor_ID INT NOT NULL,
@@ -61,7 +61,7 @@ CREATE TABLE HasActor
   FOREIGN KEY (Actor_ID) REFERENCES Actors(Actor_ID)
 );
 
-CREATE TABLE HasAward
+CREATE TABLE hasaward
 (
   Award_ID INT NOT NULL,
   Movie_ID INT NOT NULL,

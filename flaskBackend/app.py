@@ -2,7 +2,6 @@ import flask
 import mysql.connector
 import bcrypt
 import json
-import werkzeug
 
 #GLOBAL VARS
 app = flask.Flask(__name__)
