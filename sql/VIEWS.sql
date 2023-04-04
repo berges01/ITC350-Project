@@ -82,16 +82,16 @@ INNER JOIN director ON movie.Director_ID = director.Director_ID;
 
 /*movie ID <-> actor name - USED FOR actorswithawards AND actorswithdirectors*/
 CREATE VIEW `movieidswithactornames` AS
-SELECT hasActor.movie_id, hasActor.actor_id, actors.actor_name 
-FROM hasActor 
+SELECT hasactor.movie_id, hasactor.actor_id, actors.actor_name 
+FROM hasactor 
 INNER JOIN actors ON
-actors.actor_id=hasActor.actor_id;
+actors.actor_id=hasactor.actor_id;
 
 /*getting movieIDs with award names*/
-CREATE VIEW `movieidswithawardnames` AS SELECT hasAward.movie_id, hasAward.award_id, award.award_name
-FROM hasAward
+CREATE VIEW `movieidswithawardnames` AS SELECT hasaward.movie_id, hasaward.award_id, award.award_name
+FROM hasaward
 INNER JOIN award ON
-award.award_id=hasAward.award_id
+award.award_id=hasaward.award_id
 ORDER BY movie_id ASC;
 
 /*actor <-> award*/
