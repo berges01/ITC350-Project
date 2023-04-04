@@ -14,7 +14,8 @@ DataBase = mysql.connector.connect(
     user="root",
     passwd=os.environ.get('passwd'),
     database="movie_mash",
-    port=3306
+    port=3306,
+    use_pure=True
 )
 
 @app.route('/')
