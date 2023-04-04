@@ -277,6 +277,24 @@ def format_response(data,cursor):
     # return the JSON string in the response
     return result_json
     
-@app.route('/user/<user_id>')  #TODO - JAKE
-def view_profile(user_id):
-    return user_id
+@app.route('/user/') 
+def view_profile():
+    email = flask.request.json.get('email', None)
+    query_string = 'SELECT * FROM movie_mash.users WHERE Email = %s'
+    cursor = DataBase.cursor(prepared=True)
+    cursor.execute(query_string, [email])
+    data = cursor.fetchall()
+    json_result = format_response(data,cursor)
+    return json_result
+
+@app.route('/customsql/') 
+def custom_sql():
+    # email = flask.request.json.get('email', None)
+    # query_string = 'SELECT * FROM movie_mash.users WHERE Email = %s'
+    # cursor = DataBase.cursor(prepared=True)
+    # cursor.execute(query_string, [email])
+    # data = cursor.fetchall()
+    # json_result = format_response(data,cursor)
+    # return json_result
+    return 1
+
