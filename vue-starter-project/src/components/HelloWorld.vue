@@ -3,9 +3,8 @@
     <h1>{{ msg }}</h1>
     <p>To execute a custom query, use the bar below</p>
     <label for="Query">Query:</label>
-    <input type="text" id="Query" name="Query" placeholder="SELECT * FROM movie.mash" size="100">
-    <input type="submit" value="Execute">
-
+    <input v-model="inputText" type="text" id="Query" name="Query" placeholder="Enter Valid SQL Here...">
+    <button @click="CustomQueryInput">Execute</button>
     <p>To execute a pre-built query, use the bar below</p>
     <form action="#">
       <label for="lang">Query: </label>
@@ -16,7 +15,7 @@
         <option value="SelectGenre">SELECT * FROM movie.mash WHERE</option>
         <option value="SortMoviesByTitle">SELECT * FROM movie.mash WHERE</option>
         <option value="MoviesWithActor">SELECT * FROM movie.mash WHERE</option>
-        <option value="MoviesWithAward">SELECT * FROM movie.mash WHERE</option>
+        <option value="MoviesWithAward">SELECT * FROM movie.mash W''HERE</option>
         <option value="MoviesWithDirector">SELECT * FROM movie.mash WHERE</option>
         <option value="ActorsWithAward">SELECT * FROM movie.mash WHERE</option>
         <option value="AvgMovieRatingByActor">SELECT * FROM movie.mash WHERE</option>
@@ -33,15 +32,35 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="js">
+import axios from 'axios'
 import { defineComponent } from 'vue'
-
-export default defineComponent({
-  name: 'HelloWorld',
-  props: {
-    msg: String
+export default {
+  name: 'InputComponent',
+  data () {
+    return {
+      inputText: ''
+    }
+  },
+  methods: {
+    async CustomQueryInput () {
+      const response = await axios.get('http://127.0.0.1:5000/customsql/', {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        params: {
+          sql: this.inputText
+        }
+      })
+        .then(response => {
+          console.log(response.data)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    }
   }
-})
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
