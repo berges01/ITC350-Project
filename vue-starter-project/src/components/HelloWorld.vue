@@ -5,11 +5,11 @@
     <p>To execute a custom query, use the bar below</p>
     <label for="Query">Query:</label>
     <input type="text" id="Query" name="Query" placeholder="SELECT * FROM movie.mash" size="100">
-    <button type="button" onclick="executePython()">Execute Python Script (Query)</button>
+    <button type="button" onclick="executePython()">Execute</button>
 
     <p>To execute a pre-built query, use the bar below</p>
     <form action="#">
-      <label for="lang">Query: </label>
+      <label for="lang">Query:</label>
       <select name="queries" id="query" style="width: 700px;">
         <option value="FavoritedByMe">SELECT * FROM movie.mash WHERE FavoritedByMe = uid</option>
         <option value="SortByReleaseDate">SELECT * FROM movie.mash WHERE releasedate = date</option>
