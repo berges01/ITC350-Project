@@ -1,10 +1,16 @@
-import mysql.connector
+from flask import Flask, jsonify
+import mysql.connector, os
 from dotenv import load_dotenv
-import os
+load_dotenv()
+
+app = Flask(__name__)
+
+@app.route('/')
 
 def main():
+    user_query = input("Enter Query: ")
     DataBase = CreateConnection()
-    CreateCursor(DataBase)
+    CreateCursor(DataBase,user_query)
 
 
 def CreateConnection():
@@ -18,8 +24,8 @@ def CreateConnection():
     return DataBase
 
 
-def CreateCursor(DataBase):
-    query = "SELECT * FROM movie ORDER BY Title ASC"
+def CreateCursor(DataBase,user_query):
+    query = user_query
     cursor = DataBase.cursor()
     cursor.execute(query)
     rows = cursor.fetchall()

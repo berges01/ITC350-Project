@@ -1,11 +1,12 @@
 /* eslint-disable */
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
     <p>To execute a custom query, use the bar below</p>
-    <label for="Query">Query:</label>
-    <input type="text" id="Query" name="Query" placeholder="SELECT * FROM movie.mash" size="100">
-    <button type="button" onclick="executePython()">Execute</button>
+    <form>
+      <label for="input" >Query:</label>
+      <input type="text" id="input" name="input" style="width: 700px;">
+      <button v-on:click="runJavaScript">Execute</button>
+    </form>
 
     <p>To execute a pre-built query, use the bar below</p>
     <form action="#">
@@ -30,19 +31,29 @@
       </select>
       <input type="submit" value="Execute" />
 </form>
-    <!-- todo connect backend -->
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script>
+import axios from 'axios'
 
-export default defineComponent({
-  name: 'HelloWorld',
-  props: {
-    msg: String
+export default {
+  data () {
+    return {
+      query: '',
+      results: []
+    }
+  },
+  methods: {
+    submitQuery () {
+      axios.get('/api/query', {
+        params: { query: this.query }
+      }).then((response) => {
+        this.results = response.data
+      })
+    }
   }
-})
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
