@@ -5,6 +5,9 @@
     <label for="Query">Query:</label>
     <input type="text" id="Query" name="Query" placeholder="SELECT * FROM movie.mash" size="100">
     <input type="submit" value="Execute">
+    <div>
+      {{ message }}
+    </div>
 
     <p>To execute a pre-built query, use the bar below</p>
     <form action="#">
@@ -33,16 +36,30 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" "allowJs": true>
 import { defineComponent } from 'vue'
+
 
 export default defineComponent({
   name: 'HelloWorld',
   props: {
     msg: String
   }
-})
 </script>
+import { hello } from '../api/'
+export default {
+  data() {
+    return {
+      message: ''
+    }
+  },
+  mounted() {
+    hello()
+      .then(data => this.message = data)
+  }
+}
+})
+
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
