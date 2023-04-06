@@ -7,9 +7,6 @@
       <span class="h5" style = "padding-right: 40px;">Query:</span>
       <input type="text" v-model="inputText" style="width: 700px; margin-bottom: 100px; height: 37px;"  placeholder="SELECT * FROM Movies" class="form-row align-items-center h5">
       <button @click="CustomQueryInput" class="btn btn-success">Execute</button>
-      <div v-for="(item, index) in returnedItems" :key="index">
-      <pre>{{ JSON.stringify(item, null, 2) }}</pre>
-      </div>
     <p class="h2">To execute a pre-built query, use the bar below</p>
     <form action="#" class="h5"> <div></div>
       <span style = "padding-right: 40px;">Query:</span>
@@ -36,7 +33,8 @@ export default {
   name: 'InputComponent',
   data () {
     return {
-      inputText: ''
+      inputText: '',
+      returnedItems: ''
     }
   },
   methods: {
@@ -50,7 +48,10 @@ export default {
         }
       })
         .then(response => {
-          console.log(response.data)
+          this.returnedItems = response.data
+          const jsonString = JSON.stringify(this.returnedItems, null, 2)
+          const newTab = window.open('', '_blank')
+          newTab.document.body.innerHTML = `<div v-for="(item, index) in returnedItems" :key="index"><pre>${jsonString}</pre></div>`
         })
         .catch(error => {
           console.log(error)
