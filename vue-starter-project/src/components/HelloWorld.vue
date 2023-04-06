@@ -1,35 +1,28 @@
 /* eslint-disable */
 <template>
   <div class="hello">
-    <p>To execute a custom query, use the bar below</p>
-      Query:<input type="text" v-model="inputText" style="width: 700px;">
-      <button @click="CustomQueryInput">Execute</button>
+    <p class="h2">To execute a custom query, use the bar below</p>
+      <span class="h5">Query:</span>
+      <input type="text" v-model="inputText" style="width: 700px; margin-bottom: 180px; height: 37px;"  placeholder="SELECT * FROM Movies" class="form-row align-items-center h5">
+      <button @click="CustomQueryInput" class="btn btn-success">Execute</button>
       <div v-for="(item, index) in returnedItems" :key="index">
       <pre>{{ JSON.stringify(item, null, 2) }}</pre>
       </div>
-    <p>To execute a pre-built query, use the bar below</p>
-    <form action="#">
-      <label for="lang">Query:</label>
-      <select name="queries" id="query" style="width: 700px;">
-        <option value="FavoritedByMe">SELECT * FROM movie.mash WHERE FavoritedByMe = uid</option>
-        <option value="SortByReleaseDate">SELECT * FROM movie.mash WHERE releasedate = date</option>
-        <option value="SortByRuntime">SELECT * FROM movie.mash WHERE run</option>
-        <option value="SelectGenre">SELECT * FROM movie.mash WHERE</option>
-        <option value="SortMoviesByTitle">SELECT * FROM movie.mash WHERE</option>
-        <option value="MoviesWithActor">SELECT * FROM movie.mash WHERE</option>
-        <option value="MoviesWithAward">SELECT * FROM movie.mash W''HERE</option>
-        <option value="MoviesWithDirector">SELECT * FROM movie.mash WHERE</option>
-        <option value="ActorsWithAward">SELECT * FROM movie.mash WHERE</option>
-        <option value="AvgMovieRatingByActor">SELECT * FROM movie.mash WHERE</option>
-        <option value="AvgMovieRatingByDirector">SELECT * FROM movie.mash WHERE</option>
-        <option value="ActorsWithDirector">SELECT * FROM movie.mash WHERE</option>
-        <option value="SelectSpecificMovie">SELECT * FROM movie.mash WHERE</option>
-        <option value="SelectContentRating">SELECT * FROM movie.mash WHERE</option>
-        <option value="MovieRuntimeUnder2hours">SELECT * FROM movie.mash WHERE</option>
-        <option value="SelectMoviesReleasedBetween">SELECT * FROM movie.mash WHERE</option>
+    <p class="h2">To execute a pre-built query, use the bar below</p>
+    <form action="#" class="h5"> <div></div>Query:
+      <label for="lang" class="h5" ></label>
+      <select name="queries" id="query" style="width: 700px; height: 37px;">
+        <option value="FavoritedByMe">SELECT * FROM selectmovies</option>
+        <option value="SortByReleaseDate">SELECT * FROM movie_mash.highlyratedmovies</option>
+        <option value="SortByRuntime">SELECT * FROM movie_mash.moviesbyreleasedate</option>
+        <option value="SelectGenre">SELECT * FROM movie_mash.moviesbyruntime</option>
+        <option value="SortMoviesByTitle">SELECT * FROM movie_mash.moviesundertwohours</option>
+        <option value="MoviesWithActor">SELECT * FROM movie_mash.moviesbydirectorname</option>
+        <option value="MoviesWithAward">SELECT Title, IMDB_Rating FROM movie_mash.sortbyrating</option>
+        <option value="MoviesWithDirector">SELECT Title, Genre FROM movie_mash.sortbygenre</option>
       </select>
-      <input type="submit" value="Execute" />
-</form>
+      <input type="submit" value="Execute" class="btn btn-success"/>
+    </form>
   </div>
 </template>
 
@@ -44,17 +37,11 @@ export default {
     }
   },
   methods: {
-    async CustomQueryInput () {
-      const response = await axios.get('http://127.0.0.1:5000/customsql/', {
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        params: {
-          sql: this.inputText
-        }
-      })
+    makeApiCall () {
+      axios.get('https://your-backend-url.com/api/data')
         .then(response => {
-          this.returnedItems = response.data
+          console.log(response.data)
+        // do something with the data
         })
         .catch(error => {
           console.log(error)
@@ -66,6 +53,14 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+label {
+    font-size: 20px !important;
+  }
+
+.navbar-custom {
+  height: 100px;
+}
+
 h3 {
   margin: 40px 0 0;
 }

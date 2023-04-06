@@ -1,8 +1,8 @@
 /* eslint-disable */
 <template>
     <header>
-      <img alt="Vue logo" src="../assets/movie-mash.jpg" height="50">
-      <p>Movie Mash</p>
+      <img alt="Vue logo" src="../assets/movie-mash.jpg" height="75">
+      <p class="display-4">Movie Mash</p>
       <nav>
       <ul>
         <li><router-link to="/">Home</router-link></li>
@@ -17,7 +17,7 @@
 <style lang="scss">
     header {
     display: flex;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #4e4c4c;
     padding: .5rem 1rem;
 
     p {

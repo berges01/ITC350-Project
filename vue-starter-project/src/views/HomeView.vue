@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <img alt="Home Logo" src="../assets/film_icon.png" height="50">
+    <img alt="Home Logo" src="../assets/film_icon.png" height="250">
     <HelloWorld msg="Welcome to Movie Mash!"/>
   </div>
 </template>
