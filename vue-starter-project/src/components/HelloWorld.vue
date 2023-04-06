@@ -2,12 +2,9 @@
 <template>
   <div class="hello">
     <p>To execute a custom query, use the bar below</p>
-    <form>
-      <label for="input" >Query:</label>
-      <input type="text" id="input" name="input" style="width: 700px;">
-      <button v-on:click="runJavaScript">Execute</button>
-    </form>
-
+      Query:<input type="text" v-model="inputText" style="width: 700px;">
+      <button @click="submitInput">Execute</button>
+      <p v-if="outputText">{{ outputText }}</p>
     <p>To execute a pre-built query, use the bar below</p>
     <form action="#">
       <label for="lang">Query:</label>
@@ -36,7 +33,6 @@
 
 <script>
 import axios from 'axios'
-
 export default {
   data () {
     return {

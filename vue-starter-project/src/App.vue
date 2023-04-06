@@ -5,12 +5,21 @@
 
 <script>
 import AppHeader from '@/components/AppHeader.vue'
+import axios from 'axios'
 
 export default {
   components: {
     AppHeader
   }
 }
+
+axios.get('http://localhost:5000/data')
+  .then(response => {
+    console.log(response.data)
+  })
+  .catch(error => {
+    console.log(error)
+  })
 </script>
 
 <style lang="scss">
