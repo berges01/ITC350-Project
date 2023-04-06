@@ -1,11 +1,35 @@
 /* eslint-disable */
 <template>
-  <h1>Login Page</h1>
-    <div id="login">
-        <input type="text" name="username" v-model="input.username" placeholder="Username" />
-        <input type="password" name="password" v-model="input.password" placeholder="Password" />
-        <button type="button" v-on:click="login()">Login</button>
+<form>
+  <!-- Email input -->
+  <div class="form-outline mb-4">
+    <label class="form-label" for="form2Example1">Username</label>
+    <input type="text" name="username" v-model="input.username" placeholder="Username"  />
+  </div>
+
+  <!-- Password input -->
+  <div class="form-outline mb-4">
+    <label class="form-label" for="form2Example2">Password</label>
+    <input type="password" name="password" v-model="input.password" placeholder="Password" />
+  </div>
+
+  <!-- 2 column grid layout for inline styling -->
+  <div class="row mb-4">
+    <div class="col d-flex justify-content-center">
+      <!-- Checkbox -->
     </div>
+  </div>
+
+  <!-- Submit button -->
+  <button type="button" class="btn btn-primary btn-block mb-4 btn-success">Sign in</button>
+
+  <!-- Register buttons -->
+  <div class="text-center">
+    <p>Not a member?
+      <ul><router-link to="/createUser">Sign Up</router-link></ul>
+    </p>
+  </div>
+</form>
 </template>
 
 <script>
