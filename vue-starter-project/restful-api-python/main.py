@@ -129,6 +129,8 @@ def genre(Genre):
         cursor.close() 
         conn.close()
 
+
+
 # @app.route('/update', methods=['PUT'])
 # def update_emp():
 #     try:
