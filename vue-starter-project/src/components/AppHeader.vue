@@ -1,7 +1,7 @@
 /* eslint-disable */
 <template>
     <header>
-      <img alt="Vue logo" src="../assets/movie-mash.jpg" height="75">
+      <img alt="Movie logo" src="../assets/movie-mash.jpg" height="75">
       <p class="display-4">Movie Mash</p>
       <nav>
       <ul>
@@ -35,6 +35,7 @@
     ul li {
       display: inline-flex;
       margin-left: 1rem;
+      font-size: large;
     }
   }
 </style>
