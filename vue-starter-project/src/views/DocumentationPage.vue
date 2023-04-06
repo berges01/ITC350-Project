@@ -2,11 +2,7 @@
 <template>
     <div>
       <h1>Documentation</h1>
-      <h2 align = "left">Authors:</h2>
-      <p align = "left">Caleb Barton</p>
-      <p align = "left">Erik Berges</p>
-      <p align = "left">Jake Barnum</p>
-      <p align = "left">Jona Monette</p>
-      <p align = "left">Joshua Halivand</p>
+      <h3 align = "left">Authors:</h3>
+      <p align = "left">Caleb Barton, Erik Berges, Jacob Barnum, Jona Monette, Joshua Halivand</p>
     </div>
 </template>
