@@ -1,15 +1,16 @@
 /* eslint-disable */
 <template>
+  <h1>Login Page</h1>
 <form>
   <!-- Email input -->
   <div class="form-outline mb-4">
-    <label class="form-label" for="form2Example1">Username</label>
+    <label class="form-label" for="form2Example1" style = "padding-right: 20px; padding-top: 20px;">Username</label>
     <input type="text" name="username" v-model="input.username" placeholder="Username"  />
   </div>
 
   <!-- Password input -->
   <div class="form-outline mb-4">
-    <label class="form-label" for="form2Example2">Password</label>
+    <label class="form-label" for="form2Example2" style = "padding-right: 20px;">Password</label>
     <input type="password" name="password" v-model="input.password" placeholder="Password" />
   </div>
 

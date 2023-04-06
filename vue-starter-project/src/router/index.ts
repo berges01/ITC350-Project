@@ -3,7 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import PageNotFound from '@/views/PageNotFound.vue'
 import LoginPage from '@/views/LoginPage.vue'
 import DocumentationPage from '@/views/DocumentationPage.vue'
-import CreateUser from '@/views/CreateUser.vue'
+import CreateUser from '@/views/SignupPage.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
