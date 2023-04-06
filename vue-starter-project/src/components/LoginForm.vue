@@ -1,45 +1,47 @@
+/* eslint-disable */
 <template>
-    <div>
-      <h1>Login</h1>
-      <form @submit.prevent="handleSubmit">
-        <label>
-          Username:
-          <input type="text" v-model="username" required>
-        </label>
-        <br>
-        <label>
-          Password:
-          <input type="password" v-model="password" required>
-        </label>
-        <br>
-        <button type="submit">Login</button>
-      </form>
-      <p v-if="error" style="color: red">{{ error }}</p>
+    <div id="login">
+        <input type="text" name="username" v-model="input.username" placeholder="Username" />
+        <input type="password" name="password" v-model="input.password" placeholder="Password" />
+        <button type="button" v-on:click="login()">Login</button>
     </div>
-  </template>
-  
-  <script>
-  import { mapActions } from 'vuex';
-  
-  export default {
-    data() {
-      return {
+</template>
+
+<script lang="js">
+export default {
+  name: 'LoginPage',
+  data () {
+    return {
+      input: {
         username: '',
-        password: '',
-        error: '',
-      };
-    },
-    methods: {
-      ...mapActions('auth', ['login']),
-      async handleSubmit() {
-        try {
-          await this.login({ username: this.username, password: this.password });
-          this.$router.push('/')
-        } catch (error) {
-          this.error = error.message
+        password: ''
+      }
+    }
+  },
+  methods: {
+    login () {
+      if (this.input.username !== '' && this.input.password !== '') {
+        if (this.input.username === this.$parent.mockAccount.username && this.input.password === this.$parent.mockAccount.password) {
+          this.$emit('authenticated', true)
+          this.$router.replace({ name: 'secure' })
+        } else {
+          console.log('The username and / or password is incorrect')
         }
-      },
-    },
-  };
-  </script>
-  
+      } else {
+        console.log('A username and password must be present')
+      }
+    }
+  }
+}
+</script>
+
+<style scoped>
+    #login {
+        width: 500px;
+        border: 1px solid #CCCCCC;
+        background-color: #FFFFFF;
+        margin: auto;
+        margin-top: 200px;
+        padding: 20px;
+    }
+</style>
