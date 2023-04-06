@@ -3,8 +3,10 @@
   <div class="hello">
     <p>To execute a custom query, use the bar below</p>
       Query:<input type="text" v-model="inputText" style="width: 700px;">
-      <button @click="submitInput">Execute</button>
-      <p v-if="outputText">{{ outputText }}</p>
+      <button @click="CustomQueryInput">Execute</button>
+      <div v-for="(item, index) in returnedItems" :key="index">
+      <pre>{{ JSON.stringify(item, null, 2) }}</pre>
+      </div>
     <p>To execute a pre-built query, use the bar below</p>
     <form action="#">
       <label for="lang">Query:</label>
@@ -37,7 +39,8 @@ export default {
   name: 'InputComponent',
   data () {
     return {
-      inputText: ''
+      inputText: '',
+      returnedItems: ''
     }
   },
   methods: {
@@ -51,7 +54,7 @@ export default {
         }
       })
         .then(response => {
-          console.log(response.data)
+          this.returnedItems = response.data
         })
         .catch(error => {
           console.log(error)
