@@ -1,7 +1,7 @@
 /* eslint-disable */
 <template>
   <div class="hello">
-    <img alt="Home Logo" src="../assets/film_icon.png" height="250">
+    <img alt="Home Logo" src="../assets/film_icon.png" height="150">
     <HelloWorld msg="Welcome to Movie Mash!"/>
     <p class="h2">To execute a custom query, use the bar below</p>
       <span class="h5" style = "padding-right: 40px;">Query:</span>
