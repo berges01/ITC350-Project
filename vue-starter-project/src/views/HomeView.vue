@@ -31,20 +31,26 @@
 
 <script lang="js">
 import axios from 'axios'
+import { defineComponent } from 'vue'
 export default {
   name: 'InputComponent',
   data () {
     return {
-      inputText: '',
-      returnedItems: ''
+      inputText: ''
     }
   },
   methods: {
-    makeApiCall () {
-      axios.get('https://your-backend-url.com/api/data')
+    async CustomQueryInput () {
+      const response = await axios.get('http://127.0.0.1:5000/customsql/', {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        params: {
+          sql: this.inputText
+        }
+      })
         .then(response => {
           console.log(response.data)
-        // do something with the data
         })
         .catch(error => {
           console.log(error)
