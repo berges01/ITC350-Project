@@ -15,7 +15,7 @@
         <option value="SelectGenre">SELECT * FROM movie.mash WHERE</option>
         <option value="SortMoviesByTitle">SELECT * FROM movie.mash WHERE</option>
         <option value="MoviesWithActor">SELECT * FROM movie.mash WHERE</option>
-        <option value="MoviesWithAward">SELECT * FROM movie.mash WHERE</option>
+        <option value="MoviesWithAward">SELECT * FROM movie.mash W''HERE</option>
         <option value="MoviesWithDirector">SELECT * FROM movie.mash WHERE</option>
         <option value="ActorsWithAward">SELECT * FROM movie.mash WHERE</option>
         <option value="AvgMovieRatingByActor">SELECT * FROM movie.mash WHERE</option>
@@ -31,22 +31,31 @@
   </div>
 </template>
 
-<script>
+<script lang="js">
 import axios from 'axios'
 export default {
+  name: 'InputComponent',
   data () {
     return {
-      query: '',
-      results: []
+      inputText: ''
     }
   },
   methods: {
-    submitQuery () {
-      axios.get('/api/query', {
-        params: { query: this.query }
-      }).then((response) => {
-        this.results = response.data
+    async CustomQueryInput () {
+      const response = await axios.get('http://127.0.0.1:5000/customsql/', {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        params: {
+          sql: this.inputText
+        }
       })
+        .then(response => {
+          console.log(response.data)
+        })
+        .catch(error => {
+          console.log(error)
+        })
     }
   }
 }

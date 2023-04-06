@@ -1,4 +1,5 @@
 from dotenv import load_dotenv
+from flask_cors import CORS
 load_dotenv()
 
 import flask
@@ -9,6 +10,7 @@ import os
 
 #GLOBAL VARS
 app = flask.Flask(__name__)
+cors = CORS(app)
 DataBase = mysql.connector.connect(
     host="localhost",
     user="root",
@@ -96,7 +98,7 @@ def sort_movies_by_genre():
 
 @app.route('/movieswithgenre/', methods=['GET']) #MOVIES OF PARTICULAR GENRE
 def get_movies_of_genre():
-    genre = flask.request.json.get('genre', None)
+    genre = flask.request.args.get('genre', None)
     query_string = 'SELECT Title, Genre FROM movie_mash.sortbygenre WHERE Genre = %s'
     data = (genre,)
     cursor = DataBase.cursor(prepared=True)
@@ -107,7 +109,7 @@ def get_movies_of_genre():
 
 @app.route('/specificmovie/', methods=['GET']) #Specific Movie by ID - JONA - FINISHED
 def get_specific_movie():
-    movie_id = flask.request.json.get('movie_id', None)
+    movie_id = flask.request.args.get('movie_id', None)
     values=(movie_id,)
     query_string = 'SELECT * FROM movie_mash.moviessortedbytitle WHERE movie_id = %s'
     cursor = DataBase.cursor(prepared=True)
@@ -118,7 +120,7 @@ def get_specific_movie():
 
 @app.route('/actorswithdirector/', methods=['GET']) #returns list of directors that have worked with a PARTICULAR actor - JONA - FINISHED
 def get_actors_with_director():
-    actor_name = flask.request.json.get('actor_name', None)
+    actor_name = flask.request.args.get('actor_name', None)
     values = (actor_name,)
     query_string = 'SELECT * FROM movie_mash.actornameswithdirectornames WHERE actor_name = %s'
     cursor = DataBase.cursor(prepared=True)
@@ -129,7 +131,7 @@ def get_actors_with_director():
 
 @app.route('/avgdirectorsmoviesratings/', methods=['GET']) #TODO Average Director's Movies' Ratings - JONA - FINISHED
 def get_avg_directors_movies_ratings():
-    director_name = flask.request.json.get('director_name', None)
+    director_name = flask.request.args.get('director_name', None)
     values = (director_name,)
     query_string = 'SELECT Director_Name, AVG(IMDB_Rating) FROM movie_mash.averageratingofmoviebydirector WHERE Director_Name = %s GROUP BY Director_Name;' 
     cursor = DataBase.cursor(prepared=True)
@@ -140,7 +142,7 @@ def get_avg_directors_movies_ratings():
 
 @app.route('/avgactorsmoviesratings/', methods=['GET']) #TODO Average Actor's Movies' Ratings - JONA - STATUS: FINISHED
 def get_avg_actors_movies_ratings():
-    actor_name = flask.request.json.get('actor_name', None)
+    actor_name = flask.request.args.get('actor_name', None)
     values = (actor_name,)
     query_string = 'SELECT Actor_Name, AVG(IMDB_Rating) FROM movie_mash.averageratingofmoviewithactor WHERE Actor_Name = %s GROUP BY Actor_Name;'
     cursor = DataBase.cursor(prepared=True)
@@ -151,7 +153,7 @@ def get_avg_actors_movies_ratings():
 
 @app.route('/actorsawards/', methods=['GET']) #TODO Return a particular Actor with their movies' awards - JONA - FINISHED
 def get_actors_movies_awards():
-    actor_name = flask.request.json.get('actor_name', None)
+    actor_name = flask.request.args.get('actor_name', None)
     values = (actor_name,)
     query_string = 'SELECT * FROM movie_mash.actornameswithawardnames WHERE actor_name = %s'
     cursor = DataBase.cursor(prepared=True)
@@ -162,7 +164,7 @@ def get_actors_movies_awards():
 
 @app.route('/directorsmovies/', methods=['GET']) #TODO returns all movies by a particular director - JAKE
 def get_directors_movies():
-    director_id = flask.request.json.get('director_id', None)
+    director_id = flask.request.args.get('director_id', None)
     data = (director_id,)
     query = "SELECT title, director_name FROM movieidswithdirectornames WHERE director_id = %s;"
     cursor = DataBase.cursor(prepared=True)
@@ -173,7 +175,7 @@ def get_directors_movies():
 
 @app.route('/moviesawards/', methods=['GET']) #TODO get awards for a particular movie - JAKE
 def get_movie_awards():
-    movie_id = flask.request.json.get('movie_id', None)
+    movie_id = flask.request.args.get('movie_id', None)
     data = (movie_id,)
     query = "SELECT * FROM movienameswithawardnames WHERE movie_id = %s;"
     cursor = DataBase.cursor(prepared=True)
@@ -184,7 +186,7 @@ def get_movie_awards():
 
 @app.route('/moviesofcontentrating/', methods=['GET']) #Return movies with a certain content rating (G,PG,PG-13,R)
 def get_movies_with_content_rating():
-    content_rating = flask.request.json.get('content_rating', None)
+    content_rating = flask.request.args.get('content_rating', None)
     values = (content_rating,)
     query = "SELECT Title, Content_Rating FROM movie_mash.selectmovies WHERE Content_Rating = %s ORDER BY Title ASC;"
     cursor = DataBase.cursor(prepared = True)
@@ -195,8 +197,8 @@ def get_movies_with_content_rating():
 
 @app.route('/moviesreleasedbetween/', methods=['GET']) #Return movies between two dates.
 def get_movies_between():
-    start_year = flask.request.json.get('date1', None)
-    end_year = flask.request.json.get('date2', None)
+    start_year = flask.request.args.get('date1', None)
+    end_year = flask.request.args.get('date2', None)
     range = [start_year, end_year]
     query = "SELECT * FROM movie_mash.selectmovies WHERE Release_Year BETWEEN %s AND %s;"
     cursor = DataBase.cursor(prepared=True)
@@ -207,7 +209,7 @@ def get_movies_between():
 
 @app.route('/favoritedbyme/', methods=['GET']) #RETURN MOVIES FAVORITED BY ME.
 def get_my_favorites():
-    user_id = flask.request.json.get('user_id', None)
+    user_id = flask.request.args.get('user_id', None)
     query_string = 'SELECT Title FROM movie_mash.favoritedmoviesformatted WHERE Email = %s'
     cursor = DataBase.cursor(prepared=True)
     cursor.execute(query_string, [user_id])
@@ -242,9 +244,9 @@ def login():
     elif response == False:
         return flask.jsonify({'Authentication Error': 'Invalid username or password.'})
 
-@app.route('/user/') 
+@app.route('/user/', methods=['GET']) 
 def view_profile():
-    email = flask.request.json.get('email', None)
+    email = flask.request.args.get('email', None)
     query_string = 'SELECT * FROM movie_mash.users WHERE Email = %s'
     cursor = DataBase.cursor(prepared=True)
     cursor.execute(query_string, [email])
@@ -252,9 +254,9 @@ def view_profile():
     json_result = format_response(data,cursor)
     return json_result
 
-@app.route('/customsql/') 
+@app.route('/customsql/', methods=['GET']) 
 def custom_sql():
-    query_string = flask.request.json.get('sql', None)
+    query_string = flask.request.args.get('sql', None)
     legality = sanitize_input(query_string)
     if legality == True:
         cursor = DataBase.cursor(prepared=True)
@@ -275,7 +277,7 @@ def sanitize_input(sql):
     return legal
 
 
-def authenticate(email,password): #TODO
+def authenticate(email,password):
     password = password.encode("utf-8")
     query = "SELECT Passwd FROM movie_mash.users WHERE email = %s"
     cursor = DataBase.cursor(prepared=True)
@@ -292,7 +294,7 @@ def authenticate(email,password): #TODO
             return False
         
         
-def add_user(firstName,lastName,email,password): #TODO
+def add_user(firstName,lastName,email,password):
     #check for duplicate emails.IDs if there are no duplicates return 0 else 1.
     try:
         values = (firstName, lastName, email, password)
