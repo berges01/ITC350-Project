@@ -38,6 +38,64 @@ export default {
     }
   },
   methods: {
+    async sortMoviesByTitle () {
+      // TODO
+    },
+    async highlyRatedMovies () {
+      // TODO
+    },
+    async moviesByReleaseDate () {
+      // TODO
+    },
+    async moviesByRunTime () {
+      // TODO
+    },
+    async moviesUnderTwoHours () {
+      // TODO
+    },
+    async moviesByDirectorName () {
+      // TODO
+    },
+    async moviesByRating () {
+      // TODO
+    },
+    async moviesByGenre () {
+      // TODO
+    },
+    async moviesWithGenre () {
+      // TODO
+    },
+    async specificMovie () {
+      // TODO
+    },
+    async actorsWithDirector () {
+      // TODO
+    },
+    async avgDirectorsMoviesRatings () {
+      // TODO
+    },
+    async avgActorsMoviesRatings () {
+      // TODO
+    },
+    async actorsAwards () {
+      // TODO
+    },
+    async directorsMovies () {
+      // TODO
+    },
+    async moviesAwards () {
+      // TODO
+    },
+    async moviesOfContentRating () {
+      // TODO
+    },
+    async moviesReleasedBetween () {
+      // TODO
+    },
+    async favoritedByMe () {
+      // TODO - NOT SURE IF THIS WILL BE ON THIS PAGE
+      // MAY BE ON THE USER PAGE
+    },
     async CustomQueryInput () {
       const response = await axios.get('http://127.0.0.1:5000/customsql/', {
         headers: {
