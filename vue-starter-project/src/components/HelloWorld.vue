@@ -1,13 +1,13 @@
+/* eslint-disable */
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
     <p>To execute a custom query, use the bar below</p>
     <label for="Query">Query:</label>
     <input v-model="inputText" type="text" id="Query" name="Query" placeholder="Enter Valid SQL Here...">
     <button @click="CustomQueryInput">Execute</button>
     <p>To execute a pre-built query, use the bar below</p>
     <form action="#">
-      <label for="lang">Query: </label>
+      <label for="lang">Query:</label>
       <select name="queries" id="query" style="width: 700px;">
         <option value="FavoritedByMe">SELECT * FROM movie.mash WHERE FavoritedByMe = uid</option>
         <option value="SortByReleaseDate">SELECT * FROM movie.mash WHERE releasedate = date</option>
@@ -28,7 +28,6 @@
       </select>
       <input type="submit" value="Execute" />
 </form>
-    <!-- todo connect backend -->
   </div>
 </template>
 
