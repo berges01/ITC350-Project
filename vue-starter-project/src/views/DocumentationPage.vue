@@ -2,10 +2,11 @@
 <template>
     <div>
       <h1>Documentation</h1>
-      <h2>Here are some examples of queries and how they work</h2>
-      <p align = "left">Select all movies favorited by me</p>
-      <p align = "left">QUERY</p>
-      <p align = "left">Select all movies and sort them by their release date</p>
-      <p align = "left">QUERY</p>
+      <h2 align = "left">Authors:</h2>
+      <p align = "left">Caleb Barton</p>
+      <p align = "left">Erik Berges</p>
+      <p align = "left">Jake Barnum</p>
+      <p align = "left">Jona Monette</p>
+      <p align = "left">Joshua Halivand</p>
     </div>
 </template>

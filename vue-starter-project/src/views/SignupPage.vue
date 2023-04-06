@@ -1,6 +1,6 @@
 /* eslint-disable */
 <template>
-  <h1>Sign-up Page</h1>
+  <h1>Sign-Up Page</h1>
 <form>
   <!-- Email input -->
   <div class="form-outline mb-4">
