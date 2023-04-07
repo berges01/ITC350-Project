@@ -27,7 +27,7 @@
   <!-- Register buttons -->
   <div class="text-center">
     <p>Not a member?
-      <ul><router-link to="/createUser">Sign Up</router-link></ul>
+      <ul><router-link to="/signup">Sign Up</router-link></ul>
     </p>
   </div>
 </form>
