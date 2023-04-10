@@ -4,8 +4,8 @@
     <img alt="Home Logo" src="../assets/film_icon.png" height="150">
     <HelloWorld msg="Welcome to Movie Mash!"/>
     <p class="h2">To execute a custom query, use the bar below</p>
-      <span class="h5" style = "padding-right: 40px;">Query:</span>
-      <input type="text" v-model="inputText" style="width: 700px; margin-bottom: 100px; height: 37px;"  placeholder="SELECT * FROM Movies" class="form-row align-items-center h5">
+      <span class="h5" style = "padding-right: 20px;">Query:</span>
+      <input type="text" v-model="inputText" style="width: 1000px; margin-bottom: 100px; height: 37px;"  placeholder="SELECT * FROM Movies" class="form-row align-items-center h5">
       <button @click="CustomQueryInput" class="btn btn-success">Execute</button>
     <p class="h2">Or try some of our pre-built queries below</p>
     <button @click="sortMoviesByTitle" class="btn btn-success">SortMoviesByTitle</button>
