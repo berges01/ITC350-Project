@@ -7,28 +7,50 @@
       <span class="h5" style = "padding-right: 40px;">Query:</span>
       <input type="text" v-model="inputText" style="width: 700px; margin-bottom: 100px; height: 37px;"  placeholder="SELECT * FROM Movies" class="form-row align-items-center h5">
       <button @click="CustomQueryInput" class="btn btn-success">Execute</button>
-    <p class="h2">To execute a pre-built query, use the bar below</p>
-    <form action="#" class="h5"> <div></div>
-      <span style = "padding-right: 40px;">Query:</span>
-      <label for="lang" class="h5" ></label>
-      <select name="queries" id="query" style="width: 700px; height: 37px;">
-        <option value="FavoritedByMe">SELECT * FROM selectmovies</option>
-        <option value="SortByReleaseDate">SELECT * FROM movie_mash.highlyratedmovies</option>
-        <option value="SortByRuntime">SELECT * FROM movie_mash.moviesbyreleasedate</option>
-        <option value="SelectGenre">SELECT * FROM movie_mash.moviesbyruntime</option>
-        <option value="SortMoviesByTitle">SELECT * FROM movie_mash.moviesundertwohours</option>
-        <option value="MoviesWithActor">SELECT * FROM movie_mash.moviesbydirectorname</option>
-        <option value="MoviesWithAward">SELECT Title, IMDB_Rating FROM movie_mash.sortbyrating</option>
-        <option value="MoviesWithDirector">SELECT Title, Genre FROM movie_mash.sortbygenre</option>
-      </select>
-      <input type="submit" value="Execute" class="btn btn-success"/>
-    </form>
+    <p class="h2">Or try some of our pre-built queries below</p>
+    <button @click="sortMoviesByTitle" class="btn btn-success">SortMoviesByTitle</button>
+    <button @click="highlyRatedMovies" class="btn btn-success">HighlyRatedMovies</button>
+    <button @click="moviesByReleaseDate" class="btn btn-success">SortByReleaseDate</button>
+    <button @click="moviesByRunTime" class="btn btn-success">SortByRunTime</button>
+    <button @click="moviesUnderTwoHours" class="btn btn-success">MoviesUnder2Hours</button>
+    <button @click="moviesByDirectorName" class="btn btn-success">SortMoviesByDirectorName</button>
+    <button @click="moviesByRating" class="btn btn-success">SortMoviesByRating</button>
+    <p class="h2">These pre-built queries require input</p>
+    </div>
+    <div>
+    <p class="h5">See movies given a genre</p>
+    <input type="text" v-model="inputText"  placeholder="Movie Genre" class="query-boxes">
+    <button @click="moviesWithGenre" class="btn btn-success">Execute</button>
+    <p class="h5">Get Details on a Movie from its ID</p>
+    <input type="text" v-model="inputText" placeholder="Movie_ID" class="query-boxes">
+    <button @click="specificMovie" class="btn btn-success">Execute</button>
+    <p class="h5">See what actors have worked with directors</p>
+    <input type="text" v-model="inputText" placeholder="Actor_Name" class="query-boxes">
+    <button @click="actorsWithDirector" class="btn btn-success">Execute</button>
+    <p class="h5">See average rating fo a director's movies</p>
+    <input type="text" v-model="inputText" placeholder="Director_Name" class="query-boxes">
+    <button @click="avgDirectorsMoviesRatings" class="btn btn-success">Execute</button>
+    <p class="h5">See average rating of movies with given actor</p>
+    <input type="text" v-model="inputText" placeholder="Actor_Name" class="query-boxes">
+    <button @click="avgActorsMoviesRatings" class="btn btn-success">Execute</button>
+    <p class="h5">See what awards an actor has won</p>
+    <input type="text" v-model="inputText" placeholder="Actor_Name" class="query-boxes">
+    <button @click="actorsAwards" class="btn btn-success">Execute</button>
+    <p class="h5">See Movies done by a director </p>
+    <input type="text" v-model="inputText" placeholder="Director_Name" class="query-boxes">
+    <button @click="directorsMovies" class="btn btn-success">Execute</button>
+    <p class="h5">See Movies given a content Rating</p>
+    <input type="text" v-model="inputText" placeholder="Content Rating e.g G,PG..." class="query-boxes">
+    <button @click="moviesOfContentRating" class="btn btn-success">Execute</button>
+    <p class="h5">Find movies release between dates</p>
+    <input type="text" v-model="inputText" placeholder="Date one" class="query-boxes">
+    <input type="text" v-model="inputText" placeholder="Date two" class="query-boxes">
+    <button @click="moviesReleasedBetween" class="btn btn-success">Execute</button>
   </div>
 </template>
 
 <script lang="js">
 import axios from 'axios'
-import { defineComponent } from 'vue'
 export default {
   name: 'InputComponent',
   data () {
@@ -39,58 +61,347 @@ export default {
   },
   methods: {
     async sortMoviesByTitle () {
-      // TODO
+      const response = await axios.get('http://127.0.0.1:5000/sortmoviesbytitle/', {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        params: {
+          sql: this.inputText
+        }
+      })
+        .then(response => {
+          this.returnedItems = response.data
+          const jsonString = JSON.stringify(this.returnedItems, null, 2)
+          const newTab = window.open('', '_blank')
+          newTab.document.body.innerHTML = `<div v-for="(item, index) in returnedItems" :key="index"><pre>${jsonString}</pre></div>`
+        })
+        .catch(error => {
+          console.log(error)
+        })
     },
     async highlyRatedMovies () {
-      // TODO
+      const response = await axios.get('http://127.0.0.1:5000/highlyratedmovies/', {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        params: {
+          sql: this.inputText
+        }
+      })
+        .then(response => {
+          this.returnedItems = response.data
+          const jsonString = JSON.stringify(this.returnedItems, null, 2)
+          const newTab = window.open('', '_blank')
+          newTab.document.body.innerHTML = `<div v-for="(item, index) in returnedItems" :key="index"><pre>${jsonString}</pre></div>`
+        })
+        .catch(error => {
+          console.log(error)
+        })
     },
     async moviesByReleaseDate () {
-      // TODO
+      const response = await axios.get('http://127.0.0.1:5000/moviesbyreleasedate/', {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        params: {
+          sql: this.inputText
+        }
+      })
+        .then(response => {
+          this.returnedItems = response.data
+          const jsonString = JSON.stringify(this.returnedItems, null, 2)
+          const newTab = window.open('', '_blank')
+          newTab.document.body.innerHTML = `<div v-for="(item, index) in returnedItems" :key="index"><pre>${jsonString}</pre></div>`
+        })
+        .catch(error => {
+          console.log(error)
+        })
     },
     async moviesByRunTime () {
-      // TODO
+      const response = await axios.get('http://127.0.0.1:5000/moviesbyruntime/', {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        params: {
+          sql: this.inputText
+        }
+      })
+        .then(response => {
+          this.returnedItems = response.data
+          const jsonString = JSON.stringify(this.returnedItems, null, 2)
+          const newTab = window.open('', '_blank')
+          newTab.document.body.innerHTML = `<div v-for="(item, index) in returnedItems" :key="index"><pre>${jsonString}</pre></div>`
+        })
+        .catch(error => {
+          console.log(error)
+        })
     },
     async moviesUnderTwoHours () {
-      // TODO
+      const response = await axios.get('http://127.0.0.1:5000/moviesundertwohours/', {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        params: {
+          sql: this.inputText
+        }
+      })
+        .then(response => {
+          this.returnedItems = response.data
+          const jsonString = JSON.stringify(this.returnedItems, null, 2)
+          const newTab = window.open('', '_blank')
+          newTab.document.body.innerHTML = `<div v-for="(item, index) in returnedItems" :key="index"><pre>${jsonString}</pre></div>`
+        })
+        .catch(error => {
+          console.log(error)
+        })
     },
     async moviesByDirectorName () {
-      // TODO
+      const response = await axios.get('http://127.0.0.1:5000/moviesbydirectorname/', {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        params: {
+          sql: this.inputText
+        }
+      })
+        .then(response => {
+          this.returnedItems = response.data
+          const jsonString = JSON.stringify(this.returnedItems, null, 2)
+          const newTab = window.open('', '_blank')
+          newTab.document.body.innerHTML = `<div v-for="(item, index) in returnedItems" :key="index"><pre>${jsonString}</pre></div>`
+        })
+        .catch(error => {
+          console.log(error)
+        })
     },
     async moviesByRating () {
-      // TODO
+      const response = await axios.get('http://127.0.0.1:5000/moviesbyrating/', {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        params: {
+          sql: this.inputText
+        }
+      })
+        .then(response => {
+          this.returnedItems = response.data
+          const jsonString = JSON.stringify(this.returnedItems, null, 2)
+          const newTab = window.open('', '_blank')
+          newTab.document.body.innerHTML = `<div v-for="(item, index) in returnedItems" :key="index"><pre>${jsonString}</pre></div>`
+        })
+        .catch(error => {
+          console.log(error)
+        })
     },
     async moviesByGenre () {
-      // TODO
+      const response = await axios.get('http://127.0.0.1:5000/moviesbygenre/', {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        params: {
+          sql: this.inputText
+        }
+      })
+        .then(response => {
+          this.returnedItems = response.data
+          const jsonString = JSON.stringify(this.returnedItems, null, 2)
+          const newTab = window.open('', '_blank')
+          newTab.document.body.innerHTML = `<div v-for="(item, index) in returnedItems" :key="index"><pre>${jsonString}</pre></div>`
+        })
+        .catch(error => {
+          console.log(error)
+        })
     },
+    // Here begin the user input queries
     async moviesWithGenre () {
-      // TODO
+      const response = await axios.get('http://127.0.0.1:5000/movieswithgenre/', {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        params: {
+          sql: this.inputText
+        }
+      })
+        .then(response => {
+          this.returnedItems = response.data
+          const jsonString = JSON.stringify(this.returnedItems, null, 2)
+          const newTab = window.open('', '_blank')
+          newTab.document.body.innerHTML = `<div v-for="(item, index) in returnedItems" :key="index"><pre>${jsonString}</pre></div>`
+        })
+        .catch(error => {
+          console.log(error)
+        })
     },
     async specificMovie () {
-      // TODO
+      const response = await axios.get('http://127.0.0.1:5000/specificmovie/', {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        params: {
+          sql: this.inputText
+        }
+      })
+        .then(response => {
+          this.returnedItems = response.data
+          const jsonString = JSON.stringify(this.returnedItems, null, 2)
+          const newTab = window.open('', '_blank')
+          newTab.document.body.innerHTML = `<div v-for="(item, index) in returnedItems" :key="index"><pre>${jsonString}</pre></div>`
+        })
+        .catch(error => {
+          console.log(error)
+        })
     },
     async actorsWithDirector () {
-      // TODO
+      const response = await axios.get('http://127.0.0.1:5000/actorswithdirector/', {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        params: {
+          sql: this.inputText
+        }
+      })
+        .then(response => {
+          this.returnedItems = response.data
+          const jsonString = JSON.stringify(this.returnedItems, null, 2)
+          const newTab = window.open('', '_blank')
+          newTab.document.body.innerHTML = `<div v-for="(item, index) in returnedItems" :key="index"><pre>${jsonString}</pre></div>`
+        })
+        .catch(error => {
+          console.log(error)
+        })
     },
     async avgDirectorsMoviesRatings () {
-      // TODO
+      const response = await axios.get('http://127.0.0.1:5000/avgdirectorsmoviesratings/', {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        params: {
+          sql: this.inputText
+        }
+      })
+        .then(response => {
+          this.returnedItems = response.data
+          const jsonString = JSON.stringify(this.returnedItems, null, 2)
+          const newTab = window.open('', '_blank')
+          newTab.document.body.innerHTML = `<div v-for="(item, index) in returnedItems" :key="index"><pre>${jsonString}</pre></div>`
+        })
+        .catch(error => {
+          console.log(error)
+        })
     },
     async avgActorsMoviesRatings () {
-      // TODO
+      const response = await axios.get('http://127.0.0.1:5000/avgactorsmoviesratings/', {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        params: {
+          sql: this.inputText
+        }
+      })
+        .then(response => {
+          this.returnedItems = response.data
+          const jsonString = JSON.stringify(this.returnedItems, null, 2)
+          const newTab = window.open('', '_blank')
+          newTab.document.body.innerHTML = `<div v-for="(item, index) in returnedItems" :key="index"><pre>${jsonString}</pre></div>`
+        })
+        .catch(error => {
+          console.log(error)
+        })
     },
     async actorsAwards () {
-      // TODO
+      const response = await axios.get('http://127.0.0.1:5000/actorsawards/', {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        params: {
+          sql: this.inputText
+        }
+      })
+        .then(response => {
+          this.returnedItems = response.data
+          const jsonString = JSON.stringify(this.returnedItems, null, 2)
+          const newTab = window.open('', '_blank')
+          newTab.document.body.innerHTML = `<div v-for="(item, index) in returnedItems" :key="index"><pre>${jsonString}</pre></div>`
+        })
+        .catch(error => {
+          console.log(error)
+        })
     },
     async directorsMovies () {
-      // TODO
+      const response = await axios.get('http://127.0.0.1:5000/directorsmovies/', {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        params: {
+          sql: this.inputText
+        }
+      })
+        .then(response => {
+          this.returnedItems = response.data
+          const jsonString = JSON.stringify(this.returnedItems, null, 2)
+          const newTab = window.open('', '_blank')
+          newTab.document.body.innerHTML = `<div v-for="(item, index) in returnedItems" :key="index"><pre>${jsonString}</pre></div>`
+        })
+        .catch(error => {
+          console.log(error)
+        })
     },
     async moviesAwards () {
-      // TODO
+      const response = await axios.get('http://127.0.0.1:5000/moviesawards/', {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        params: {
+          sql: this.inputText
+        }
+      })
+        .then(response => {
+          this.returnedItems = response.data
+          const jsonString = JSON.stringify(this.returnedItems, null, 2)
+          const newTab = window.open('', '_blank')
+          newTab.document.body.innerHTML = `<div v-for="(item, index) in returnedItems" :key="index"><pre>${jsonString}</pre></div>`
+        })
+        .catch(error => {
+          console.log(error)
+        })
     },
     async moviesOfContentRating () {
-      // TODO
+      const response = await axios.get('http://127.0.0.1:5000/moviesofcontentrating/', {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        params: {
+          sql: this.inputText
+        }
+      })
+        .then(response => {
+          this.returnedItems = response.data
+          const jsonString = JSON.stringify(this.returnedItems, null, 2)
+          const newTab = window.open('', '_blank')
+          newTab.document.body.innerHTML = `<div v-for="(item, index) in returnedItems" :key="index"><pre>${jsonString}</pre></div>`
+        })
+        .catch(error => {
+          console.log(error)
+        })
     },
     async moviesReleasedBetween () {
-      // TODO
+      const response = await axios.get('http://127.0.0.1:5000/moviesreleasedbetween/', {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        params: {
+          sql: this.inputText
+        }
+      })
+        .then(response => {
+          this.returnedItems = response.data
+          const jsonString = JSON.stringify(this.returnedItems, null, 2)
+          const newTab = window.open('', '_blank')
+          newTab.document.body.innerHTML = `<div v-for="(item, index) in returnedItems" :key="index"><pre>${jsonString}</pre></div>`
+        })
+        .catch(error => {
+          console.log(error)
+        })
     },
     async favoritedByMe () {
       // TODO - NOT SURE IF THIS WILL BE ON THIS PAGE
@@ -118,3 +429,12 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+ .query-boxes{
+  width: 250px;
+  margin-bottom: 50px;
+  height: 37px;
+  text-align: left;
+ }
+</style>
