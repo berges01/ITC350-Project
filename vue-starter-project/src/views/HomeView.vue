@@ -32,7 +32,7 @@
     <input type="text" v-model="director_rating" placeholder="Director_Name" class="query-boxes">
     <button @click="avgDirectorsMoviesRatings" class="btn btn-success">Execute</button>
     <p class="h5">See average rating of movies with given actor</p>
-    <input type="text" v-model="actor_name_rating" placeholder="Actor_Name" class="query-boxes">
+    <input type="text" v-model="actor_rating" placeholder="Actor_Name" class="query-boxes">
     <button @click="avgActorsMoviesRatings" class="btn btn-success">Execute</button>
     <p class="h5">See what awards an actor has won</p>
     <input type="text" v-model="actor_award" placeholder="Actor_Name" class="query-boxes">
@@ -217,7 +217,7 @@ export default {
           'Content-Type': 'application/json'
         },
         params: {
-          genre: this.inputText
+          genre: this.movie_genre
         }
       })
         .then(response => {
@@ -236,7 +236,7 @@ export default {
           'Content-Type': 'application/json'
         },
         params: {
-          sql: this.inputText
+          sql: this.movie_id
         }
       })
         .then(response => {
@@ -255,7 +255,7 @@ export default {
           'Content-Type': 'application/json'
         },
         params: {
-          sql: this.inputText
+          sql: this.actor_name_director
         }
       })
         .then(response => {
@@ -274,7 +274,7 @@ export default {
           'Content-Type': 'application/json'
         },
         params: {
-          sql: this.inputText
+          sql: this.director_rating
         }
       })
         .then(response => {
@@ -293,7 +293,7 @@ export default {
           'Content-Type': 'application/json'
         },
         params: {
-          sql: this.inputText
+          sql: this.actor_rating
         }
       })
         .then(response => {
@@ -312,7 +312,7 @@ export default {
           'Content-Type': 'application/json'
         },
         params: {
-          sql: this.inputText
+          sql: this.actor_award
         }
       })
         .then(response => {
@@ -331,7 +331,7 @@ export default {
           'Content-Type': 'application/json'
         },
         params: {
-          sql: this.inputText
+          sql: this.director_movies
         }
       })
         .then(response => {
@@ -369,7 +369,7 @@ export default {
           'Content-Type': 'application/json'
         },
         params: {
-          sql: this.inputText
+          sql: this.content_rating
         }
       })
         .then(response => {
@@ -388,7 +388,8 @@ export default {
           'Content-Type': 'application/json'
         },
         params: {
-          sql: this.inputText
+          sql: this.date1,
+          sql: this.date2
         }
       })
         .then(response => {
