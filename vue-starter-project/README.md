@@ -41,7 +41,6 @@ npm install axios
 ```
 
 ### Troubleshooting Notes
-```
 When installing these packages, make sure you are in the vue-starter-project directory. If you install them under this directory, and it still is having package issues, install the packages in the distribution packages folder on your machine manually using a command like the following:
 ```
 pip install <package name> --target /path/to/dist-package/folder/
