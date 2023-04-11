@@ -1,5 +1,7 @@
 # vue-starter-project
 
+Follow the commands below to set up the front-end:
+
 ## Install Node.js
 For LINUX:
 ```
@@ -20,17 +22,19 @@ npm install -g @vue/cli
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Compiles and hot-reloads for development: Use this command to start the server to host the application
 ```
 npm run serve
 ```
+After it has compiled successfully, open your browser and naviagte to http://localhost:8080
+If you want to make any changes to the application just save them and they should be made automatically to the front-end.
 
-### Compiles and minifies for production
+### Compiles and minifies for production: Use this command when you are ready to deploy our beautiful application to the world. 
 ```
 npm run build
 ```
 
-### Lints and fixes files
+### Lints and fixes file
 ```
 npm run lint
 ```
