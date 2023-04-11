@@ -108,6 +108,6 @@
   </tr>
 </table>
       <h3 align = "left">Authors:</h3>
-      <p align = "left">Caleb Barton, Erik Berges, Jacob Barnum, Jona Monette, Joshua Halivand</p>
+      <p align = "left">Caleb Barton, Erik Berges, Jacob Barnum, Jona Monette, Joshua Haviland</p>
     </div>
 </template>
