@@ -22,6 +22,11 @@ npm install -g @vue/cli
 npm install
 ```
 
+### Axios package install
+```
+npm install axios
+```
+
 ### Compiles and hot-reloads for development: Use this command to start the server to host the application
 ```
 npm run serve
@@ -37,11 +42,6 @@ npm run build
 ### Lints and fixes file
 ```
 npm run lint
-```
-
-### Axios package install
-```
-npm install axios
 ```
 
 ### Troubleshooting Notes
