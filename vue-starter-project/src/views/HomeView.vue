@@ -15,7 +15,7 @@
     <button @click="moviesUnderTwoHours" class="btn btn-success">MoviesUnder2Hours</button>
     <button @click="moviesByDirectorName" class="btn btn-success">SortMoviesByDirectorName</button>
     <button @click="moviesByRating" class="btn btn-success">SortMoviesByRating</button>
-    <button @click="moviesByGenre" class="btn btn-success">SortMoviesByRating</button>
+    <button @click="moviesByGenre" class="btn btn-success">SortMoviesByGenre</button>
     <p class="h2">These pre-built queries require input</p>
     </div>
     <div>
@@ -38,14 +38,14 @@
     <input type="text" v-model="actor_award" placeholder="Actor_Name" class="query-boxes">
     <button @click="actorsAwards" class="btn btn-success">Execute</button>
     <p class="h5">See Movies done by a director </p>
-    <input type="text" v-model="director_movies" placeholder="Director_Name" class="query-boxes">
+    <input type="text" v-model="director_movies" placeholder="Director_id" class="query-boxes">
     <button @click="directorsMovies" class="btn btn-success">Execute</button>
     <p class="h5">See Movies given a content Rating</p>
     <input type="text" v-model="content_rating" placeholder="Content Rating e.g G,PG..." class="query-boxes">
     <button @click="moviesOfContentRating" class="btn btn-success">Execute</button>
-    <p class="h5">Find movies release between dates</p>
-    <input type="text" v-model="date1" placeholder="Date one" class="query-boxes">
-    <input type="text" v-model="date2" placeholder="Date two" class="query-boxes">
+    <p class="h5">Find movies release between years</p>
+    <input type="text" v-model="date1" placeholder="Start year" class="query-boxes">
+    <input type="text" v-model="date2" placeholder="End year" class="query-boxes">
     <button @click="moviesReleasedBetween" class="btn btn-success">Execute</button>
   </div>
 </template>
@@ -65,9 +65,6 @@ export default {
       const response = await axios.get('http://127.0.0.1:5000/sortmoviesbytitle/', {
         headers: {
           'Content-Type': 'application/json'
-        },
-        params: {
-          sql: this.inputText
         }
       })
         .then(response => {
@@ -84,9 +81,6 @@ export default {
       const response = await axios.get('http://127.0.0.1:5000/highlyratedmovies/', {
         headers: {
           'Content-Type': 'application/json'
-        },
-        params: {
-          sql: this.inputText
         }
       })
         .then(response => {
@@ -103,9 +97,6 @@ export default {
       const response = await axios.get('http://127.0.0.1:5000/moviesbyreleasedate/', {
         headers: {
           'Content-Type': 'application/json'
-        },
-        params: {
-          sql: this.inputText
         }
       })
         .then(response => {
@@ -122,9 +113,6 @@ export default {
       const response = await axios.get('http://127.0.0.1:5000/moviesbyruntime/', {
         headers: {
           'Content-Type': 'application/json'
-        },
-        params: {
-          sql: this.inputText
         }
       })
         .then(response => {
@@ -141,9 +129,6 @@ export default {
       const response = await axios.get('http://127.0.0.1:5000/moviesundertwohours/', {
         headers: {
           'Content-Type': 'application/json'
-        },
-        params: {
-          sql: this.inputText
         }
       })
         .then(response => {
@@ -160,9 +145,6 @@ export default {
       const response = await axios.get('http://127.0.0.1:5000/moviesbydirectorname/', {
         headers: {
           'Content-Type': 'application/json'
-        },
-        params: {
-          sql: this.inputText
         }
       })
         .then(response => {
@@ -179,9 +161,6 @@ export default {
       const response = await axios.get('http://127.0.0.1:5000/moviesbyrating/', {
         headers: {
           'Content-Type': 'application/json'
-        },
-        params: {
-          sql: this.inputText
         }
       })
         .then(response => {
@@ -236,7 +215,7 @@ export default {
           'Content-Type': 'application/json'
         },
         params: {
-          sql: this.movie_id
+          movie_id: this.movie_id
         }
       })
         .then(response => {
@@ -255,7 +234,7 @@ export default {
           'Content-Type': 'application/json'
         },
         params: {
-          sql: this.actor_name_director
+          actor_name: this.actor_name_director
         }
       })
         .then(response => {
@@ -274,7 +253,7 @@ export default {
           'Content-Type': 'application/json'
         },
         params: {
-          sql: this.director_rating
+          director_name: this.director_rating
         }
       })
         .then(response => {
@@ -293,7 +272,7 @@ export default {
           'Content-Type': 'application/json'
         },
         params: {
-          sql: this.actor_rating
+          actor_name: this.actor_rating
         }
       })
         .then(response => {
@@ -312,7 +291,7 @@ export default {
           'Content-Type': 'application/json'
         },
         params: {
-          sql: this.actor_award
+          actor_name: this.actor_award
         }
       })
         .then(response => {
@@ -331,7 +310,7 @@ export default {
           'Content-Type': 'application/json'
         },
         params: {
-          sql: this.director_movies
+          director_id: this.director_movies
         }
       })
         .then(response => {
@@ -350,7 +329,7 @@ export default {
           'Content-Type': 'application/json'
         },
         params: {
-          sql: this.inputText
+          movie_id: this.inputText
         }
       })
         .then(response => {
@@ -369,7 +348,7 @@ export default {
           'Content-Type': 'application/json'
         },
         params: {
-          sql: this.content_rating
+          content_rating: this.content_rating
         }
       })
         .then(response => {
@@ -388,8 +367,8 @@ export default {
           'Content-Type': 'application/json'
         },
         params: {
-          sql: this.date1,
-          sql: this.date2
+          date1: this.date1,
+          date2: this.date2
         }
       })
         .then(response => {
@@ -403,8 +382,23 @@ export default {
         })
     },
     async favoritedByMe () {
-      // TODO - NOT SURE IF THIS WILL BE ON THIS PAGE
-      // MAY BE ON THE USER PAGE
+      const response = await axios.get('http://127.0.0.1:5000/moviesreleasedbetween/', {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        params: {
+          user_id: this.userid
+        }
+      })
+        .then(response => {
+          this.returnedItems = response.data
+          const jsonString = JSON.stringify(this.returnedItems, null, 2)
+          const newTab = window.open('', '_blank')
+          newTab.document.body.innerHTML = `<div v-for="(item, index) in returnedItems" :key="index"><pre>${jsonString}</pre></div>`
+        })
+        .catch(error => {
+          console.log(error)
+        })
     },
     async CustomQueryInput () {
       const response = await axios.get('http://127.0.0.1:5000/customsql/', {
