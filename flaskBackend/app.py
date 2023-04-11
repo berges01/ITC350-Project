@@ -24,6 +24,21 @@ DataBase = mysql.connector.connect(
 def root():
     return 'Hi. Good for you you found /'
 
+@app.route('/addfavmovie/', methods=['POST']) 
+def addfav():
+    user_email = flask.request.json.get('user_email', None)
+    movie_id = flask.request.json.get('movie_id', None)
+    print(movie_id)
+    print(user_email)
+    values = (movie_id, user_email)
+    query_string = 'INSERT INTO favoritedbyfavorite (Movie_ID, Email) VALUES (%s, %s)'
+    cursor = DataBase.cursor(prepared=True)
+    cursor.execute(query_string, values)
+    DataBase.commit()
+    return {
+        "message": "Movie Favorited"
+    }
+
 @app.route('/sortmoviesbytitle/', methods=['GET']) #Sort movies by title.
 def sort_movies_by_title():
     query_string = 'SELECT * FROM selectmovies'
@@ -234,7 +249,7 @@ def sign_up():
         return 'Failed to add user. Duplicate entry found for email ' + email
 
 
-@app.route('/login/', methods=['POST']) #TODO
+@app.route('/login/', methods=['POST'])
 def login():
     email = flask.request.json.get('email', None)
     password = flask.request.json.get('password', None)

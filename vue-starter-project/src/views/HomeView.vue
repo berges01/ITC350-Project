@@ -19,6 +19,10 @@
     <p class="h2">These pre-built queries require input</p>
     </div>
     <div>
+    <p class="h5">Add movie to favorited list.</p>
+    <input type="text" v-model="user_id_favorite"  placeholder="your email" class="query-boxes">
+    <input type="text" v-model="movie_id_favorite"  placeholder="movie_id" class="query-boxes">
+    <button @click="FavoriteAMovie" class="btn btn-success">Execute</button>
     <p class="h5">See your favorite movies</p>
     <input type="text" v-model="user_id"  placeholder="Email" class="query-boxes">
     <button @click="favoritedByMe" class="btn btn-success">Execute</button>
@@ -391,6 +395,25 @@ export default {
         },
         params: {
           user_id: this.user_id
+        }
+      })
+        .then(response => {
+          this.returnedItems = response.data
+          const jsonString = JSON.stringify(this.returnedItems, null, 2)
+          const newTab = window.open('', '_blank')
+          newTab.document.body.innerHTML = `<div v-for="(item, index) in returnedItems" :key="index"><pre>${jsonString}</pre></div>`
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+    async FavoriteAMovie () {
+      const response = await axios.post('http://127.0.0.1:5000/addfavmovie/', {
+        user_email: this.user_id_favorite,
+        movie_id: this.movie_id_favorite
+      }, {
+        headers: {
+          'Content-Type': 'application/json'
         }
       })
         .then(response => {
