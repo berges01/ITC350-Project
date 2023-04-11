@@ -15,6 +15,7 @@
     <button @click="moviesUnderTwoHours" class="btn btn-success">MoviesUnder2Hours</button>
     <button @click="moviesByDirectorName" class="btn btn-success">SortMoviesByDirectorName</button>
     <button @click="moviesByRating" class="btn btn-success">SortMoviesByRating</button>
+    <button @click="moviesByGenre" class="btn btn-success">SortMoviesByRating</button>
     <p class="h2">These pre-built queries require input</p>
     </div>
     <div>
@@ -197,9 +198,6 @@ export default {
       const response = await axios.get('http://127.0.0.1:5000/moviesbygenre/', {
         headers: {
           'Content-Type': 'application/json'
-        },
-        params: {
-          sql: this.inputText
         }
       })
         .then(response => {
@@ -219,7 +217,7 @@ export default {
           'Content-Type': 'application/json'
         },
         params: {
-          sql: this.inputText
+          genre: this.inputText
         }
       })
         .then(response => {
