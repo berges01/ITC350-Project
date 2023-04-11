@@ -107,6 +107,8 @@
     <td>x</td>
   </tr>
 </table>
+      <h3 align = "left">Views</h3>
+      <p align = "left"> SELECT actor_id, actor_name, award_name FROM actornameswithawardnames WHERE actor_id</p>
       <h3 align = "left">Authors:</h3>
       <p align = "left">Caleb Barton, Erik Berges, Jacob Barnum, Jona Monette, Joshua Haviland</p>
     </div>
