@@ -35,17 +35,17 @@
     <input type="text" v-model="actor_name_rating" placeholder="Actor_Name" class="query-boxes">
     <button @click="avgActorsMoviesRatings" class="btn btn-success">Execute</button>
     <p class="h5">See what awards an actor has won</p>
-    <input type="text" v-model="inputText" placeholder="Actor_Name" class="query-boxes">
+    <input type="text" v-model="actor_award" placeholder="Actor_Name" class="query-boxes">
     <button @click="actorsAwards" class="btn btn-success">Execute</button>
     <p class="h5">See Movies done by a director </p>
-    <input type="text" v-model="inputText" placeholder="Director_Name" class="query-boxes">
+    <input type="text" v-model="director_movies" placeholder="Director_Name" class="query-boxes">
     <button @click="directorsMovies" class="btn btn-success">Execute</button>
     <p class="h5">See Movies given a content Rating</p>
-    <input type="text" v-model="inputText" placeholder="Content Rating e.g G,PG..." class="query-boxes">
+    <input type="text" v-model="content_rating" placeholder="Content Rating e.g G,PG..." class="query-boxes">
     <button @click="moviesOfContentRating" class="btn btn-success">Execute</button>
     <p class="h5">Find movies release between dates</p>
-    <input type="text" v-model="inputText" placeholder="Date one" class="query-boxes">
-    <input type="text" v-model="inputText" placeholder="Date two" class="query-boxes">
+    <input type="text" v-model="date1" placeholder="Date one" class="query-boxes">
+    <input type="text" v-model="date2" placeholder="Date two" class="query-boxes">
     <button @click="moviesReleasedBetween" class="btn btn-success">Execute</button>
   </div>
 </template>
