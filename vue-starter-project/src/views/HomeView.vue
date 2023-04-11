@@ -19,6 +19,9 @@
     <p class="h2">These pre-built queries require input</p>
     </div>
     <div>
+    <p class="h5">See your favorite movies</p>
+    <input type="text" v-model="user_id"  placeholder="Email" class="query-boxes">
+    <button @click="favoritedByMe" class="btn btn-success">Execute</button>
     <p class="h5">See movies given a genre</p>
     <input type="text" v-model="movie_genre"  placeholder="Movie Genre" class="query-boxes">
     <button @click="moviesWithGenre" class="btn btn-success">Execute</button>
@@ -382,12 +385,12 @@ export default {
         })
     },
     async favoritedByMe () {
-      const response = await axios.get('http://127.0.0.1:5000/moviesreleasedbetween/', {
+      const response = await axios.get('http://127.0.0.1:5000/favoritedbyme/', {
         headers: {
           'Content-Type': 'application/json'
         },
         params: {
-          user_id: this.userid
+          user_id: this.user_id
         }
       })
         .then(response => {
