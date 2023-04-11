@@ -20,19 +20,19 @@
     </div>
     <div>
     <p class="h5">See movies given a genre</p>
-    <input type="text" v-model="inputText"  placeholder="Movie Genre" class="query-boxes">
+    <input type="text" v-model="movie_genre"  placeholder="Movie Genre" class="query-boxes">
     <button @click="moviesWithGenre" class="btn btn-success">Execute</button>
     <p class="h5">Get Details on a Movie from its ID</p>
-    <input type="text" v-model="inputText" placeholder="Movie_ID" class="query-boxes">
+    <input type="text" v-model="movie_id" placeholder="Movie_ID" class="query-boxes">
     <button @click="specificMovie" class="btn btn-success">Execute</button>
     <p class="h5">See what actors have worked with directors</p>
-    <input type="text" v-model="inputText" placeholder="Actor_Name" class="query-boxes">
+    <input type="text" v-model="actor_name_director" placeholder="Actor_Name" class="query-boxes">
     <button @click="actorsWithDirector" class="btn btn-success">Execute</button>
     <p class="h5">See average rating fo a director's movies</p>
-    <input type="text" v-model="inputText" placeholder="Director_Name" class="query-boxes">
+    <input type="text" v-model="director_rating" placeholder="Director_Name" class="query-boxes">
     <button @click="avgDirectorsMoviesRatings" class="btn btn-success">Execute</button>
     <p class="h5">See average rating of movies with given actor</p>
-    <input type="text" v-model="inputText" placeholder="Actor_Name" class="query-boxes">
+    <input type="text" v-model="actor_name_rating" placeholder="Actor_Name" class="query-boxes">
     <button @click="avgActorsMoviesRatings" class="btn btn-success">Execute</button>
     <p class="h5">See what awards an actor has won</p>
     <input type="text" v-model="inputText" placeholder="Actor_Name" class="query-boxes">
