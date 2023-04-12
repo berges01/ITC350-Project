@@ -7,7 +7,7 @@
       <span class="h5" style = "padding-right: 20px;">Query:</span>
       <input type="text" v-model="inputText" style="width: 1000px; margin-bottom: 50px; height: 37px;"  placeholder="SELECT * FROM Movies" class="form-row align-items-center h5">
       <button @click="CustomQueryInput" class="btn btn-success">Execute</button>
-    <p class="h2">Or try some of our pre-built queries below</p>
+    <p class="h2">Try a pre-built query with these buttons:</p>
     <button @click="sortMoviesByTitle" class="btn btn-success">SortMoviesByTitle</button>
     <button @click="highlyRatedMovies" class="btn btn-success">HighlyRatedMovies</button>
     <button @click="moviesByReleaseDate" class="btn btn-success">SortByReleaseDate</button>
