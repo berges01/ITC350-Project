@@ -50,14 +50,14 @@
   </tr>
 </thead>
   <tr>
-    <td><input type="text" v-model="user_id"  placeholder="Email" class="query-boxes">
-    <button @click="favoritedByMe" class="btn btn-success">Execute</button></td>
-    <td><input type="text" v-model="movie_genre"  placeholder="Movie Genre" class="query-boxes">
-    <button @click="moviesWithGenre" class="btn btn-success">Execute</button></td>
-    <td><input type="text" v-model="movie_id" placeholder="Movie_ID" class="query-boxes">
-    <button @click="specificMovie" class="btn btn-success">Execute</button></td>
-    <td><input type="text" v-model="actor_name_director" placeholder="Actor_Name" class="query-boxes">
-    <button @click="actorsWithDirector" class="btn btn-success">Execute</button></td>
+    <td><input type="text" v-model="actor_rating" placeholder="Actor_Name" class="query-boxes">
+    <button @click="avgActorsMoviesRatings" class="btn btn-success">Execute</button></td>
+    <td><input type="text" v-model="actor_award" placeholder="Actor_Name" class="query-boxes">
+    <button @click="actorsAwards" class="btn btn-success">Execute</button></td>
+    <td><input type="text" v-model="director_movies" placeholder="Director_id" class="query-boxes">
+    <button @click="directorsMovies" class="btn btn-success">Execute</button></td>
+    <td><input type="text" v-model="content_rating" placeholder="Content Rating e.g G,PG..." class="query-boxes">
+    <button @click="moviesOfContentRating" class="btn btn-success">Execute</button></td>
   </tr>
 
     <p class="h5">Add movie to favorited list.</p>
